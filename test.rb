@@ -93,3 +93,19 @@ require "rest-client"
           <div class="trailer mb-5 text-center" style="background-image:url('https://img.youtube.com/vi/<%= movie["trailer_youtube_key"] %>/maxresdefault.jpg');">
       <%= link_to "<i class='fa-solid fa-play'></i>".html_safe, "https://www.youtube.com/watch?v=#{movie["trailer_youtube_key"]}", target: "_blank" %>
     </div>
+
+
+
+
+  <div class="header-text">
+    <h1>Welcome to Filmdash</h1>
+    <h2>Your cinematic journey!</h2>
+  </div>
+  <%= image_tag "home_page/Chaplin.webp", alt: "Charlie Chaplin" %>
+  <div class="get-started-button">
+    <%= link_to "Get started", preferences_path, class: "button-get-started" %>
+  </div>
+</div>
+<div class="bottom-image">
+<%= image_tag "home_page/Truffaut.jpg", alt: "François Truffaut" %>
+</div>
