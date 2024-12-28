@@ -1,0 +1,46 @@
+<div class="container mt-1">
+  <h2>Sign up</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :first_name,
+                  required: true %>
+      <%= f.input :last_name,
+                  required: true %>
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }%>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" } %>
+      <%= f.input :vpn,
+                  required: true,
+                  as: :radio_buttons,
+                  label: "Do you have a VPN?" %>
+      <%= f.association :country,
+                  required: true,
+                  collection: Country.all,
+                  label: "In which country are you located?" %>
+      <%= f.association :streaming_services,
+                  as: :check_boxes,
+                  include_hidden: false,
+                  collection: StreamingService.all,
+                  required: true,
+                  label: "Select your streamings subscription" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up" %>
+    </div>
+  <% end %>
+  <div style="padding-bottom: 28%;">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

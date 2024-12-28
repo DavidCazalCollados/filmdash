@@ -1,0 +1,46 @@
+<div class="top-image" style="background-image: url('https://image.tmdb.org/t/p/original<%= movie_watchlist["backdrop_path"] %>')">
+    <!-- Placeholder for the image -->
+</div>
+<div class="details-page">
+    <div class="info-section">
+        <div class="row justify-content-between">
+            <div class="col-4 title-section align-items-start">
+                <p class="movie-title"><%= movie_watchlist["title"] %></p>
+                <div class="d-flex d-block gap-1">
+                    <%# no implicit conversion of Date into String %>
+                    <p><%= Date.parse(movie_watchlist["release_date"].to_s).year %></p>
+                    <p>-</p>
+                    <p><%= movie_watchlist["runtime"] %></p>
+                    <p>min</p>
+                </div>
+            </div>
+            <div class="col-4" style="font-size: 85%;">
+                <p><i class="fa-solid fa-star text-warning"></i> <%= movie_watchlist["vote_average"] %><strong>/10</strong></p>
+            </div>
+            <div class="col-4">
+                <div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/original<%= movie_watchlist["poster_path"] %>')">
+                    <!-- Placeholder for the movie card -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="movie-description-section">
+        <p><strong>Overview: </strong><%= movie_watchlist["overview"] %></p>
+    </div>
+    <iframe src="https://www.youtube.com/embed/<%= movie_watchlist["trailer_youtube_key"] %>?playsinline=1" width="320" height="180" style="z-index=1000;"></iframe>
+    <div class="d-flex text-center flex-column mt-4">
+        <p>Watch this program on:</p>
+        <div class="d-flex image-stream-pop justify-content-center">
+            <%# undefined method `each' for nil %>
+            <% if movie_watchlist["watch_providers"] %>
+                <% movie_watchlist["watch_providers"].each do |provider| %>
+                  <%= link_to movie_watchlist["streaming_link"], target: "_blank" do %>
+                    <%= image_tag("https://image.tmdb.org/t/p/w200#{provider["logo_path"]}") %>
+                  <% end %>
+                <% end %>
+            <% else %>
+                <p>No watch providers available.</p>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="d-none play-button" data-toggle-target="play1Element">
+  <div class="play-button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+    <i class="fa-solid fa-play"></i>
+  </div>
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content background-pop mx-3 d-flex flex-column align-items-center">
+        <div class="d-flex justify-content-center mt-4">
+          <p class="modal-title fs-5" id="exampleModalLabel">Watch this program on:</p>
+          <%# <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> %>
+        </div>
+        <div class="modal-body mt-5 d-flex justify-content-center stream-body">
+          <% @result_link_movie[0]["results"][@country]["flatrate"].each do |flats| %>
+            <% @streaming_services.each do |streaming_service| %>
+              <% if (streaming_service.source_id == flats["provider_id"]) %>
+                <%= link_to @result_link_movie[0]["results"][@country]["link"], target: "_blank" do %>
+                  <%= image_tag("https://image.tmdb.org/t/p/w200#{flats["logo_path"]}", alt: flats["provider_name"]) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

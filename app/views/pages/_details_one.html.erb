@@ -1,0 +1,51 @@
+  <div class="top-image" style="background-image: url('https://image.tmdb.org/t/p/original<%= movie["backdrop_path"] %>')">
+    <!-- Placeholder for the image -->
+  </div>
+  <div class="details-page">
+
+    <div class="info-section">
+      <div class="row justify-content-between">
+        <div class="col-4 title-section align-items-start">
+          <p class="movie-title "><%= movie["title"] %></p>
+          <div class="d-flex d-block gap-1" >
+            <p><%= Date.parse(movie["release_date"]).year %></p>
+            <p>-</p>
+            <p><%= movie["runtime"] %></p>
+            <p>min</p>
+          </div>
+          <div class="d-flex gap-5 providers justify-content-start">
+            <p>WATCH ON:</p>
+            <%= render "pages/streaming_links", watch_providers: movie["watch_providers"] %>
+          </div>
+        </div>
+
+
+        <div class="col-4" style="font-size: 85%;">
+          <p><i class="fa-solid fa-star text-warning"></i> <%= movie["vote_average"] %><strong>/10</strong></p>
+
+        </div>
+
+        <div class="col-4">
+          <div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/original<%= movie["poster_path"] %>')">
+            <!-- Placeholder for the movie card -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="overviews">
+      <p><strong>Overview:  </strong><%= movie["overview"] %></p>
+    </div>
+
+
+    <iframe src="https://www.youtube.com/embed/<%= movie["trailer_youtube_key"] %>?playsinline=1" width="320" height="180" style="z-index=1000;"></iframe>
+    <div class="d-flex text-center flex-column mt-4 mb-5">
+
+      <%= turbo_frame_tag "movie_#{movie["tmdb_id"]}" do %>
+        <%= render "pages/movie_watchlist_button", movie: movie, is_in_watchlist: is_in_watchlist %>
+      <% end %>
+
+    </div>
+
+  </div>

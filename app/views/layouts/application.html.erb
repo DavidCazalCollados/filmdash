@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Filmdash</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= render 'shared/ios_pwa_links' %>
+  </head>
+
+  <body class="<%= 'homepage' if current_page?(root_path) %>">
+    <%= render "shared/flashes" %>
+      <%= yield %>
+    <%= render "shared/menubar" %>
+  </body>
+</html>

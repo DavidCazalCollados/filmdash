@@ -1,0 +1,19 @@
+<% if is_in_watchlist %>
+  <%= link_to movie_watchlist_path(movie[:id]), data: { turbo_method: :delete } do %>
+    <button class="btn btn-danger">Remove from watchlist</button>
+  <% end %>
+<% else %>
+  <%= simple_form_for MovieWatchlist.new do |f| %>
+    <%= f.input :title, as: :hidden, input_html: { value: movie["title"] } %>
+    <%= f.input :overview, as: :hidden, input_html: { value: movie["overview"] } %>
+    <%= f.input :release_date, as: :hidden, input_html: { value: movie["release_date"] } %>
+    <%= f.input :poster_path, as: :hidden, input_html: { value: movie["poster_path"] } %>
+    <%= f.input :backdrop_path, as: :hidden, input_html: { value: movie["backdrop_path"] } %>
+    <%= f.input :tmdb_id, as: :hidden, input_html: { value: movie["tmdb_id"] } %>
+    <%= f.input :vote_average, as: :hidden, input_html: { value: movie["vote_average"] } %>
+    <%= f.input :runtime, as: :hidden, input_html: { value: movie["runtime"] } %>
+    <%= f.input :trailer_youtube_key, as: :hidden, input_html: { value: movie["trailer_youtube_key"] } %>
+    <%= f.input :watch_providers, as: :hidden, input_html: { value: movie["watch_providers"].to_json } %>
+    <%= f.submit "ADD TO WATCHLIST", class: "btn add-to-watchlist-button" %>
+  <% end %>
+<% end %>

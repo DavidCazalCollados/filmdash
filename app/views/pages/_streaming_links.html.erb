@@ -1,0 +1,5 @@
+ <% watch_providers.each do |provider| %>
+  <%= link_to provider["streaming_link"], target: "_blank" do %>
+    <%= image_tag(provider["logo_path"]) %>
+  <% end %>
+<% end %>

@@ -1,0 +1,27 @@
+.background-pop {
+  background-color: $dark-grey;
+  height: 35%;
+}
+
+.stream-body {
+  height: 15%;
+  width: 80%;
+  flex-wrap: wrap;
+  gap: 5% 10%;
+  font-size: 70%;
+}
+
+.stream-body img {
+  width: auto; /* Ajuste la largeur selon ton besoin */
+  height: 100%; /* Maintien le ratio de l'image */
+  max-width: 100%; /* Empêche l'image de dépasser de son conteneur */
+  object-fit: contain; /* Maintient l'image entière sans la couper */
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.stream-body a {
+  display: inline-block;
+  text-align: center;
+  height: 40%;
+}

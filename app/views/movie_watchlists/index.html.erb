@@ -1,0 +1,32 @@
+<h1>Watchlist</h1>
+
+<% if @movie_watchlists.any? %>
+  <div class="watchlist-grid">
+    <% @movie_watchlists.each do |movie_watchlist| %>
+      <div class="movie-card" style="background-image:url('https://image.tmdb.org/t/p/original/<%= movie_watchlist.poster_path %>');" data-bs-toggle="modal" data-bs-target="#movie-<%= movie_watchlist.id %>">
+        <!-- Movie card content or placeholder if needed -->
+      </div>
+
+      <!-- Modal for Movie Details -->
+      <div class="modal fade" tabindex="-1" id="movie-<%= movie_watchlist.id %>" aria-labelledby="details" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><%= movie_watchlist.title %></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= render "pages/details_one", movie: movie_watchlist, is_in_watchlist: true %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= button_to "Remove from Watchlist", movie_watchlist_path(movie_watchlist), method: :delete, class: "btn btn-primary", data: { confirm: "Are you sure you want to remove this movie from your watchlist?" } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-watchlist-message">Your watchlist is empty.</p>
+<% end %>

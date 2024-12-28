@@ -1,0 +1,26 @@
+<div class="mobile-nav">
+  <%= link_to root_path, class: "icon-white" do %>
+    <i class="fa-solid fa-house"></i>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to edit_user_registration_path, class: "icon-white" do %>
+      <i class="fa-solid fa-user"></i>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path, class: "icon-white" do %>
+      <i class="fa-solid fa-user"></i>
+    <% end %>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to movie_watchlists_path, class: "icon-white" do %>
+      <i class="fa-solid fa-bars"></i>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_session_path, class: "icon-white" do %>
+      <i class="fa-solid fa-bars"></i>
+    <% end %>
+  <% end %>
+  <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "icon-white" do %>
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+  <% end %>
+</div>

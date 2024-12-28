@@ -1,0 +1,95 @@
+.scrolling {
+  overflow-x: auto;
+  // height: 100%;
+  // background-color: blue;
+  width: 100%;
+  text-align: center;
+}
+
+.scroll-height{
+  height: 100%;
+}
+
+.section {
+  // background-color: red;
+  height: 20%;
+  width: 100%;
+}
+
+.form-height {
+  height: 100%;
+}
+
+.radio-space {
+  object-fit: contain;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 115px;
+  // padding-right: 25%;
+  margin-right: 15px;
+  border-radius:3px;
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-space label {
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: center;
+  font-family: $body-font;
+  font-size: 1.2em;
+}
+
+.radio-space input {
+  display: none;
+}
+
+.form-submit {
+  padding-bottom: 25%;
+}
+
+.stylish-button {
+  background-color: white; /* Fond blanc */
+  color: black; /* Texte noir */
+  border: 2px solid black; /* Bordure noire */
+  padding: 12px 24px; /* Espacement intérieur */
+  font-size: 16px; /* Taille du texte */
+  font-weight: bold; /* Texte en gras */
+  text-transform: uppercase; /* Texte en majuscules */
+  border-radius: 8px; /* Coins arrondis */
+  transition: all 0.3s ease; /* Transition fluide */
+  // cursor: pointer; /* Curseur en forme de main */
+  display: inline-block; /* Pour que le bouton ne prenne que l'espace nécessaire */
+  text-align: center; /* Centrer le texte */
+  box-sizing: border-box; /* S'assurer que le padding est inclus dans la taille totale */
+}
+
+.stylish-button:hover {
+  background-color: black; /* Fond noir au survol */
+  color: white; /* Texte blanc au survol */
+  border-color: white; /* Bordure blanche au survol */
+}
+
+/* Effet au clic (active) */
+.stylish-button:active {
+  // transform: scale(0.98); /* Effet de pression au clic */
+}
+
+/* Optionnel: styliser le conteneur si nécessaire */
+.form-submit {
+  // display: inline-block; /* Pour centrer le formulaire si nécessaire */
+  margin-top: 20px; /* Espace au-dessus du bouton */
+}
+
+.marge-t {
+  margin-top: 80px;
+  padding-left: 10px;
+}
+
+.marge-t-two {
+  padding-left: 10px;
+}

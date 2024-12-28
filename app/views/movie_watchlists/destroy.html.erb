@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "movie_#{@movie_watchlist.tmdb_id}" do %>
+    <%= render "pages/movie_watchlist_button", movie: @movie_watchlist, is_in_watchlist: false %>
+<% end %>

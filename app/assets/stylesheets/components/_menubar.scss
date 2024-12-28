@@ -1,0 +1,16 @@
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: $dark-grey;
+  align-items: center;
+  z-index: 1000;
+}
+
+.icon-white {
+  font-size: $big-font;
+  color: white;
+}

@@ -1,0 +1,37 @@
+.generate-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.button-get-started,
+.more-details-button {
+  background-color: $white;
+  /* White background */
+  color: $black;
+  /* Black text */
+  padding: 10px 20px;
+  font-size: $medium-font;
+  /* Slightly smaller font size */
+  font-weight: bold;
+  /* Make text bold */
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  /* Remove underline */
+  box-shadow: 0 4px 6px $transparent-grey;
+  /* Add shadow */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.button-get-started:hover,
+.more-details-button:hover {
+  background-color: $black;
+  /* Black background on hover */
+  color: $white;
+  /* White text on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  /* Slightly larger shadow on hover */
+}

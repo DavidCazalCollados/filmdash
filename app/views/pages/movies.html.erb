@@ -1,0 +1,18 @@
+<div style="position:relative;">
+  <h1 style="text-align: center; padding-top: 25px; padding-bottom: 10px;">Your Selection!</h1>
+
+  <div class="d-flex flex-column align-items-center my-4">
+    <% if @results.length < 3 %>
+      <h1>No result</h1>
+    <% else %>
+      <% @results.each do |movie_result| %>
+        <%= render "result_movie", result: movie_result %>
+      <% end %>
+    <% end %>
+    <div class="generate-button-container">
+      <div class="generate-button">
+        <button data-action="click->toggle#refresh" class="button-get-started">Give me new choices</button>
+      </div>
+    </div>
+  </div>
+</div>

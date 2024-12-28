@@ -1,0 +1,91 @@
+.homepage .top-image,
+.homepage .bottom-image {
+  position: relative;
+  overflow: hidden;
+  margin: 0 10px;
+  /* Consistent left and right margins */
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+.homepage .top-image {
+  height: calc(66.67vh - 20px);
+  /* Top 2/3 of the screen minus padding */
+}
+
+.homepage .bottom-image {
+  padding-top: 20px;
+  /* Space between the two pictures */
+  height: calc(33.33vh - 20px);
+  /* Bottom 1/3 of the screen minus padding */
+}
+
+.homepage .top-image img,
+.homepage .bottom-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Maintain image proportions */
+  margin: 0 auto;
+  /* Center the images */
+}
+
+.homepage .top-image::before,
+.homepage .bottom-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $transparent-grey;
+  /* Light overlay */
+  z-index: 1;
+}
+
+.homepage .header-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  text-shadow: 2px 2px 4px $transparent-dark-grey;
+  /* Adding shadow for better readability */
+  z-index: 2;
+  /* Ensure header text is above the overlay */
+}
+
+.homepage .header-text h1 {
+  font-size: $biggest-font;
+  /* Increase font size for H1 */
+  font-family: $headers-font;
+  /* Use header font for H1 */
+  white-space: nowrap;
+  /* Prevents the text from wrapping */
+  margin-top: 5px;
+  /* Add space between H1 and H2 */
+}
+
+.homepage .header-text h2 {
+  font-size: 1.1em;
+  /* Increase font size for H2 */
+  font-family: $headers-font;
+  /* Use header font for H2 */
+  margin-top: 20px;
+  /* Adjust spacing between H1 and H2 */
+}
+
+.homepage .get-started-button {
+  position: absolute;
+  bottom: 60px;
+  /* Adjusted position */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.homepage .navbar {
+  position: relative;
+  z-index: 3;
+  /* Ensure navbar is above the overlay */
+}

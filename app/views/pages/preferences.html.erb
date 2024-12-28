@@ -1,0 +1,222 @@
+<div class= "banner d-flex justify-content-center text-center align-items-center">
+  <h2>Select your <br />preferences</h2>
+</div>
+
+
+<%= form_with url: preferences_movies_path, class: "form-height", method: :get do |f| %>
+    <div class="section marge-t">
+      <h5>Format</h5>
+      <div class="d-flex scrolling">
+        <div class="radio-space" id="movie-image">
+          <%= f.radio_button :format, "movie", id: 'movie' %>
+          <%= f.label :format, "Movies", for: "movie" %>
+        </div>
+        <div class="radio-space" id="serie-img">
+          <%= f.radio_button :format, "tv_series", id: 'tv_series' %>
+          <%= f.label :format, "Series", for: "tv_series" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="section mt-4 marge-t-two">
+      <h5>Runtime</h5>
+      <div class="d-flex scrolling">
+        <div class="radio-space" id="onehour-img">
+          <%= f.radio_button :runtime, "90", id: '90' %>
+          <%= f.label :runtime, "1h30 Max", for: "90" %>
+        </div>
+        <div class="radio-space" id="twohour-img">
+          <%= f.radio_button :runtime, "120", id: '120' %>
+          <%= f.label :runtime, "2h Max", for: "120" %>
+        </div>
+        <div class="radio-space" id="threehour-img">
+          <%= f.radio_button :runtime, "180", id: '180' %>
+          <%= f.label :format, "3h max", for: "120" %>
+        </div>
+        <div class="radio-space" id="fourhour-img">
+          <%= f.radio_button :runtime, "240", id: '240' %>
+          <%= f.label :format, "3h and more", for: "240" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="section mt-4 marge-t-two">
+      <h5>Genre</h5>
+      <div class="d-flex scrolling">
+        <div class="radio-space" id="action-img">
+          <%= f.radio_button :genre, "28", id: '28' %>
+          <%= f.label :genre, "Action", for: "28" %>
+        </div>
+        <div class="radio-space" id="adventure-img">
+          <%= f.radio_button :genre, "12", id: "12" %>
+          <%= f.label :genre, "Adventure", for: "12" %>
+        </div>
+        <div class="radio-space" id="animation-img">
+          <%= f.radio_button :genre, "16", id: '16' %>
+          <%= f.label :genre, "Animation", for: "16" %>
+        </div>
+        <div class="radio-space" id="comedy-img">
+          <%= f.radio_button :genre, "35", id: '35' %>
+          <%= f.label :genre, "Comedy", for: "35" %>
+        </div>
+        <div class="radio-space" id="crime-img">
+          <%= f.radio_button :genre, "80", id: '80' %>
+          <%= f.label :genre, "Crime", for: "80" %>
+        </div>
+        <div class="radio-space" id="docu-img">
+          <%= f.radio_button :genre, "99", id: '99' %>
+          <%= f.label :genre, "Documentary", for: "99" %>
+        </div>
+        <div class="radio-space" id="drama-img">
+          <%= f.radio_button :genre, "18", id: '18' %>
+          <%= f.label :genre, "Drama", for: "18" %>
+        </div>
+        <div class="radio-space" id="family-img">
+          <%= f.radio_button :genre, "10751", id: '10751' %>
+          <%= f.label :genre, "Family", for: "10751" %>
+        </div>
+        <div class="radio-space" id="fantasy-img">
+          <%= f.radio_button :genre, "14", id: '14' %>
+          <%= f.label :genre, "Fantasy", for: "14" %>
+        </div>
+        <div class="radio-space" id="history-img">
+          <%= f.radio_button :genre, "36", id: '36' %>
+          <%= f.label :genre, "History", for: "36" %>
+        </div>
+        <div class="radio-space" id="horror-img">
+          <%= f.radio_button :genre, "27", id: '27' %>
+          <%= f.label :genre, "Horror", for: "27" %>
+        </div>
+        <div class="radio-space" id="music-img">
+          <%= f.radio_button :genre, "10402", id: '10402' %>
+          <%= f.label :genre, "Music", for: "10402" %>
+        </div>
+        <div class="radio-space" id="mystery-img">
+          <%= f.radio_button :genre, "9648", id: '9648' %>
+          <%= f.label :genre, "Mystery", for: "9648" %>
+        </div>
+        <div class="radio-space" id="romance-img">
+          <%= f.radio_button :genre, "10749", id: '10749' %>
+          <%= f.label :genre, "Romance", for: "10749" %>
+        </div>
+        <div class="radio-space" id="science-img">
+          <%= f.radio_button :genre, "878", id: '878' %>
+          <%= f.label :genre, "Science Fiction", for: "878" %>
+        </div>
+        <div class="radio-space" id="thriller-img">
+          <%= f.radio_button :genre, "53", id: '53' %>
+          <%= f.label :genre, "Thriller", for: "53" %>
+        </div>
+        <div class="radio-space" id="war-img">
+          <%= f.radio_button :genre, "10752", id: '10752' %>
+          <%= f.label :genre, "War", for: "10752" %>
+        </div>
+        <div class="radio-space" id="western-img">
+          <%= f.radio_button :genre, "37", id: '37' %>
+          <%= f.label :genre, "Western", for: "37" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="section mt-4 marge-t-two">
+      <h5>Period</h5>
+      <div class="d-flex scrolling">
+        <div class="radio-space" id="thisyear-img">
+          <%= f.radio_button :period, "2024-01-01", id: '2024-01-01' %>
+          <%= f.label :period, "This year", for: "2024-01-01" %>
+        </div>
+        <div class="radio-space" id="twenty-twenty-img">
+          <%= f.radio_button :period, "2020-01-01", id: '2020-01-01' %>
+          <%= f.label :period, "2020's", for: "2020-01-01" %>
+        </div>
+        <div class="radio-space" id="twenty-ten-img">
+          <%= f.radio_button :period, "2010-01-01", id: '2010-01-01' %>
+          <%= f.label :period, "2010's", for: "2010-01-01" %>
+        </div>
+        <div class="radio-space" id="twenty-img">
+          <%= f.radio_button :period, "2000-01-01", id: '2000-01-01' %>
+          <%= f.label :period, "2000's", for: "2000-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-nine-img">
+          <%= f.radio_button :period, "1990-01-01", id: '1990-01-01' %>
+          <%= f.label :period, "1990's", for: "1990-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-eight-img">
+          <%= f.radio_button :period, "1980-01-01", id: '1980-01-01' %>
+          <%= f.label :period, "1980's", for: "1980-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-seven-img">
+          <%= f.radio_button :period, "1970-01-01", id: '1970-01-01' %>
+          <%= f.label :period, "1970's", for: "1970-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-six-img">
+          <%= f.radio_button :period, "1960-01-01", id: '1960-01-01' %>
+          <%= f.label :period, "1960's", for: "1960-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-five-img">
+          <%= f.radio_button :period, "1950-01-01", id: '1950-01-01' %>
+          <%= f.label :period, "1950's", for: "1950-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-four-img">
+          <%= f.radio_button :period, "1940-01-01", id: '1940-01-01' %>
+          <%= f.label :period, "1940's", for: "1940-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-three-img">
+          <%= f.radio_button :period, "1930-01-01", id: '1930-01-01' %>
+          <%= f.label :period, "1930's", for: "1930-01-01" %>
+        </div>
+        <div class="radio-space" id="nine-two-img">
+          <%= f.radio_button :period, "1920-01-01", id: '1920-01-01' %>
+          <%= f.label :period, "1920's", for: "1920-01-01" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4 form-submit">
+      <%= f.submit "See my selection", class: "stylish-button" %>
+    </div>
+<% end %>
+  <%# <div class="container mt-4">
+    <h5>Format</h5>
+  </div> %>
+<script>
+  const images = document.querySelectorAll(".radio-space");
+  // console.log(images);
+
+  for (let  i = 0; i < images.length; i++) {
+    images[i].onclick = function(e) {
+      e.preventDefault();
+      // console.log(e);
+      const id = this.firstElementChild;
+      console.log(id)
+      // id.checked = !id.checked
+      id.checked = true
+      const children = this.parentElement.children
+      console.log(children)
+      for (let j = 0; j < children.length; j++) {
+        if (id.checked === false) {
+          children[j].classList.remove("d-none")
+          children[j].classList.add("border")
+          children[j].classList.add("border-danger")
+          // children[j].parentElement.classList.remove("justify-content-center")
+          continue
+        }
+
+        if (this === children[j]) {
+          children[j].classList.remove("d-none")
+          children[j].classList.add("border")
+          children[j].classList.add("border-danger")
+          // children[j].parentElement.classList.add("justify-content-center")
+        }
+        else {
+          children[j].classList.toggle("d-none")
+          children[j].classList.remove("border")
+          children[j].classList.remove("border-danger")
+        }
+
+      }
+
+    }
+  }
+
+</script>

@@ -1,0 +1,53 @@
+<div
+    class="d-flex justify-content-center px-3 image-alone"
+    data-controller="result-movie"
+    data-result-movie-hide-class="d-none"
+>
+    <div class="row justify-content-center movie-info mb-3 d-flex">
+      <div class="movie-card col-4" data-action="click->result-movie#toggle" style="background-image:url('https://image.tmdb.org/t/p/original<%= result["poster_path"] %>')"></div>
+    </div>
+    <div class="d-none infos d-flex flex-column align-items-start col-8" data-result-movie-target="infos">
+        <div class="title">
+            <p><strong><%= result["title"] %></strong></p>
+        </div>
+        <div class="rating">
+            <p><i class="fa-solid fa-star text-warning"></i> <%= result["vote_average"] %>/10</p>
+        </div>
+        <%# <div class="description">
+            <p></p>
+        </div> %>
+        <div class="d-flex button-gap">
+            <button class="btn watch-button" type="button" data-bs-toggle="modal" data-bs-target="#watch-<%= result["tmdb_id"] %>">WATCH</button>
+            <button class="btn details-button" type="button" data-bs-toggle="modal" data-bs-target="#movie-<%= result["tmdb_id"] %>">DETAILS</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="movie-<%= result["tmdb_id"] %>" aria-labelledby="details" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "details_one", movie: result, is_in_watchlist: false %>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="watch-<%= result["tmdb_id"] %>" tabindex="-1" aria-labelledby="watch" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content background-pop mx-3 d-flex flex-column align-items-center">
+      <div class="d-flex justify-content-center mt-4">
+        <p class="modal-title fs-5">Watch this program on:</p>
+      </div>
+      <div class="modal-body mt-5 d-flex justify-content-center stream-body">
+        <%= render "streaming_links", watch_providers: result["watch_providers"] %>
+      </div>
+    </div>
+  </div>
+</div>

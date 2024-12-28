@@ -1,0 +1,56 @@
+.watchlist-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 20px;
+  /* Add padding on the left and right */
+}
+
+
+.movie-card {
+  width: 97px;
+  /* Three cards per row with some spacing */
+  height: 142px;
+  /* Fixed height */
+  margin-bottom: 20px;
+  /* Add vertical spacing between rows */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+// .movie-card {
+//   width: calc(33.33% - 10px);
+//   /* Three cards per row with some spacing */
+//   height: 152px;
+//   /* Fixed height */
+//   margin-bottom: 20px;
+//   /* Add vertical spacing between rows */
+//   border-radius: 5px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//   background-position: center;
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+  /* Add 20px padding to the top of the header */
+  padding-bottom: 20px;
+  /* Add 20px padding to the bottom of the header */
+}
+
+.empty-watchlist-message {
+  text-align: center;
+}

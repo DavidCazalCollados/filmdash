@@ -1,0 +1,14 @@
+.banner {
+  background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("preferences/Citizen.jpg");
+  // background-image: url("preferences/Citizen.jpg");
+  background-position: center;
+  background-size: 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  height: 28%;
+  width: 100%;
+  font-family: $body-font;
+  text-align: center;
+  font-weight: 700;
+  // border-bottom: linear-gradient(90deg, #161616, rgba(253, 142, 41, 0)) 100% 0 100% 0 / 3px 0 3px 0 ;
+}
