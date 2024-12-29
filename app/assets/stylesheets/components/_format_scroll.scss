@@ -93,3 +93,24 @@
 .marge-t-two {
   padding-left: 10px;
 }
+
+
+@media (min-width: 768px) {
+  .section {
+    height: 25%;
+  }
+
+  .radio-space {
+    height: 150px;
+    width: 260px;
+  }
+
+  .radio-space label {
+    width: 600px;
+  }
+
+  .form-submit {
+    padding-bottom: 13%;
+    padding-top: 4%;
+  }
+}
