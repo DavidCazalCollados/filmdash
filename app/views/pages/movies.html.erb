@@ -1,5 +1,5 @@
 <div style="position:relative;">
-  <h1 style="text-align: center; padding-top: 25px; padding-bottom: 10px;">Your Selection!</h1>
+  <h1 style="text-align: center; padding-top: 20px; padding-bottom: 10px;">Your Selection!</h1>
 
   <div class="d-flex flex-column align-items-center my-4">
     <% if @results.length < 3 %>
@@ -11,7 +11,7 @@
     <% end %>
     <div class="generate-button-container">
       <div class="generate-button">
-        <button data-action="click->toggle#refresh" class="button-get-started">Give me new choices</button>
+        <%= link_to 'Back to selection menu', preferences_path, class: 'button-get-started' %>
       </div>
     </div>
   </div>
