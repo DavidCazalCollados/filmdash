@@ -180,43 +180,37 @@
     <h5>Format</h5>
   </div> %>
 <script>
+  document.addEventListener("turbo:load", function () {
   const images = document.querySelectorAll(".radio-space");
-  // console.log(images);
 
-  for (let  i = 0; i < images.length; i++) {
+  for (let i = 0; i < images.length; i++) {
     images[i].onclick = function(e) {
       e.preventDefault();
-      // console.log(e);
+
       const id = this.firstElementChild;
-      console.log(id)
-      // id.checked = !id.checked
-      id.checked = true
-      const children = this.parentElement.children
-      console.log(children)
+      id.checked = true;
+      const children = this.parentElement.children;
+
       for (let j = 0; j < children.length; j++) {
         if (id.checked === false) {
-          children[j].classList.remove("d-none")
-          children[j].classList.add("border")
-          children[j].classList.add("border-danger")
-          // children[j].parentElement.classList.remove("justify-content-center")
-          continue
+          children[j].classList.remove("d-none");
+          children[j].classList.add("border");
+          children[j].classList.add("border-danger");
+          continue;
         }
 
         if (this === children[j]) {
-          children[j].classList.remove("d-none")
-          children[j].classList.add("border")
-          children[j].classList.add("border-danger")
-          // children[j].parentElement.classList.add("justify-content-center")
+          children[j].classList.remove("d-none");
+          children[j].classList.add("border");
+          children[j].classList.add("border-danger");
+        } else {
+          children[j].classList.toggle("d-none");
+          children[j].classList.remove("border");
+          children[j].classList.remove("border-danger");
         }
-        else {
-          children[j].classList.toggle("d-none")
-          children[j].classList.remove("border")
-          children[j].classList.remove("border-danger")
-        }
-
       }
-
-    }
+    };
   }
+});
 
 </script>

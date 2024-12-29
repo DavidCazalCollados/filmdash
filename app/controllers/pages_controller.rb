@@ -44,7 +44,7 @@ class PagesController < ApplicationController
       response = RestClient.get(request_url, request_headers)
       result_tt = JSON.parse(response)
       # @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
-      @result_ids = result_tt["results"].first(3).map { |movie| movie["id"] }
+      @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
       @results = @result_ids.map do |result_id|
         details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
         details = JSON.parse(details_serialized)

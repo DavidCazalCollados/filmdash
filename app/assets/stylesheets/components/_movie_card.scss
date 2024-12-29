@@ -135,3 +135,10 @@
  .providers a {
   z-index: 1000;
  }
+
+
+@media (min-width: 768px) {
+  .image-alone {
+    width: 50%;
+  }
+}
