@@ -10,7 +10,7 @@
 .movie-card {
   width: 97px;
   /* Three cards per row with some spacing */
-  height: 142px;
+  // height: 142px;
   /* Fixed height */
   margin-bottom: 20px;
   /* Add vertical spacing between rows */
@@ -53,4 +53,22 @@ h1 {
 
 .empty-watchlist-message {
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .watchlist-grid .cardphone {
+    height: 400px;  /* Ou toute autre valeur */
+    width: 250px;
+    margin: 0;
+    margin-bottom: 30px;
+  }
+
+//   .watchlist-grid {
+//     // display: flex;
+//     // grid-template-columns: repeat(5, 1fr);
+//     // justify-content: center;
+//     // padding: 0 3%;
+//     // gap: 1%;
+//     // height: 48%;
+//   }
 }
