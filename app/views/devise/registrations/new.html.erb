@@ -20,7 +20,7 @@
       <%= f.input :password_confirmation,
                   required: true,
                   input_html: { autocomplete: "new-password" } %>
-      <%= f.input :vpn,
+      <%# <%= f.input :vpn,
                   required: true,
                   as: :radio_buttons,
                   label: "Do you have a VPN?" %>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
+      <%= f.button :submit, "Sign up", class: "button-get-started mb-3" %>
     </div>
   <% end %>
   <div style="padding-bottom: 28%;">
