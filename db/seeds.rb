@@ -259,17 +259,17 @@ countries_array = [
 
 
 streaming_services_array = [
-  {name: "The Criterion Channel", source_id: 258},
+  {name: "Criterion Channel", source_id: 258},
   {name: "Netflix", source_id: 8},
   {name: "Hulu", source_id: 15},
-  {name: "HBO Max", source_id: 384},
-  {name: "Amazon Prime Video", source_id: 9},
-  {name: "Disney+", source_id: 337},
-  {name: "AppleTV+", source_id: 350},
-  {name: "Paramount+", source_id: 531},
+  {name: "Max", source_id: 1899},
+  {name: "Amazon Prime Video", source_id: 119},
+  {name: "Disney Plus", source_id: 337},
+  {name: "Apple TV Plus", source_id: 350},
+  # {name: "Paramount Plus", source_id: 531},
   {name: "Crave", source_id: 230},
   {name: "Peacock Premium", source_id: 386},
-  {name: "ICI TOU.TV", source_id: 146},
+  {name: "iciTouTV", source_id: 146},
   {name: "MUBI", source_id: 11}
 ]
 sorted_streamings = streaming_services_array.sort_by { |services| services[:name] }
@@ -289,7 +289,7 @@ def create_user(first_name)
   user = User.new(first_name: first_name, last_name: 'last_name', email:  "#{first_name}@gmail.com", password: '123456')
   user.country = Country.find_by(name: 'Canada')
   user.streaming_services << StreamingService.find_by(name: "Netflix")
-  user.streaming_services << StreamingService.find_by(name: "The Criterion Channel")
+  user.streaming_services << StreamingService.find_by(name: "Criterion Channel")
   user.streaming_services << StreamingService.find_by(name: "Amazon Prime Video")
   return user.save!
 end
@@ -336,11 +336,11 @@ watchlist_api_output = [{
       "watch_providers": [],
       "trailer_youtube_key": "P9Mxf_6pVA0"}]
 
-User.all.each do |user|
-  watchlist_api_output.each do |output|
-    movie_watchlist = MovieWatchlist.create!(title: output[:title], user: user, poster_path: output[:poster_path], overview: output[:overview], release_date: Date.parse(output[:release_date]), vote_average: output[:vote_average], runtime: output[:runtime], trailer_youtube_key: output[:trailer_youtube_key], backdrop_path: output[:backdrop_path])
-    output[:watch_providers].each do |provider|
-      StreamingLink.create!(name: provider[:provider_name], link: output[:streaming_link], movie_watchlist: movie_watchlist)
-    end
-  end
-end
+# User.all.each do |user|
+#   watchlist_api_output.each do |output|
+#     movie_watchlist = MovieWatchlist.create!(title: output[:title], user: user, poster_path: output[:poster_path], overview: output[:overview], release_date: Date.parse(output[:release_date]), vote_average: output[:vote_average], runtime: output[:runtime], trailer_youtube_key: output[:trailer_youtube_key], backdrop_path: output[:backdrop_path])
+#     output[:watch_providers].each do |provider|
+#       StreamingLink.create!(name: provider[:provider_name], link: output[:streaming_link], movie_watchlist: movie_watchlist)
+#     end
+#   end
+# end

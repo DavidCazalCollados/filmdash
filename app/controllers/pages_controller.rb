@@ -50,7 +50,7 @@ class PagesController < ApplicationController
         details = JSON.parse(details_serialized)
         prepare_result(details)
       end
-
+      # raise
     end
 
     # raise
@@ -121,6 +121,11 @@ class PagesController < ApplicationController
     streaming_services_names = current_user.streaming_services.map do |streaming_services|
       streaming_services.name
     end
+
+    streaming_services_id = current_user.streaming_services.map do |streaming_services|
+      streaming_services.source_id
+    end
+
     final_result = full_results.slice("backdrop_path", "id", "overview", "poster_path", "release_date", "title", "vote_average", "runtime")
 
     final_result["genre"] = @genre
@@ -137,6 +142,7 @@ class PagesController < ApplicationController
         user_subscribed_providers << provider
       end
     end
+
 
     tmdb_watch_providers = tmdb_watch_providers_page_link.empty? ? [] : scrape_tmdb_streaming_links(tmdb_watch_providers_page_link)
     final_result["watch_providers"] = filter_watch_providers(tmdb_watch_providers, user_subscribed_providers)
