@@ -32,3 +32,34 @@ body {
 .homepage {
   overflow: hidden;
 }
+
+.tmdb-logo {
+  background-image: url('https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg');
+  // background-color: red;
+  height: 3%;
+  width: 8%;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 3%;
+  left: 6%;
+  position: fixed;
+  z-index: 2000;
+}
+
+@media (min-width: 768px) {
+  .tmdb-logo {
+    background-image: url('https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg');
+    // background-color: red;
+    height: 3%;
+    width: 3%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 3%;
+    left: 1%;
+    // right: 2%;
+    position: fixed;
+    z-index: 2000;
+  }
+}
