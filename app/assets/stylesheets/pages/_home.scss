@@ -57,9 +57,10 @@
 }
 
 .header-text h1 {
-  font-size: $biggest-font;
+  // font-size: $biggest-font;
   /* Increase font size for H1 */
-  font-family: $headers-font;
+  // font-family: $headers-font;
+  font-family: "Yeseva One", serif;
   /* Use header font for H1 */
   white-space: nowrap;
   /* Prevents the text from wrapping */
@@ -70,7 +71,8 @@
 .header-text h2 {
   font-size: 1.1em;
   /* Increase font size for H2 */
-  font-family: $headers-font;
+  // font-family: $headers-font;
+  font-family: "Yeseva One", serif;
   /* Use header font for H2 */
   margin-top: 10px;
   /* Adjust spacing between H1 and H2 */
@@ -119,4 +121,10 @@
 .homepage {
   overflow: hidden; /* Empêche tout défilement */
   height: 100%; /* Assure que la hauteur de la page est prise en compte */
+}
+
+@media (min-width: 768px) {
+  .header-text h2 {
+    font-size: 1.3em;
+  }
 }

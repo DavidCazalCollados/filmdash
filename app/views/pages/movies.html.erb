@@ -1,9 +1,9 @@
 <div style="position:relative;">
-  <h1 style="text-align: center; padding-top: 20px; padding-bottom: 10px;">Your Selection!</h1>
+  <h1 style="text-align: center; padding-top: 20px; padding-bottom: 10px; font-family: 'Yeseva One', serif;">Your Selection!</h1>
 
   <div class="d-flex flex-column align-items-center my-4">
     <% if @results.length < 3 %>
-      <h1>No result</h1>
+      <h1 style="font-family: 'Yeseva One', serif;">No result</h1>
     <% else %>
       <% @results.each do |movie_result| %>
         <%= render "result_movie", result: movie_result %>
