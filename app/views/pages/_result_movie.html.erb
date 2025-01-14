@@ -13,9 +13,6 @@
         <div class="rating">
             <p><i class="fa-solid fa-star text-warning"></i> <%= result["vote_average"] %>/10</p>
         </div>
-        <%# <div class="description">
-            <p></p>
-        </div> %>
         <div class="d-flex button-gap">
             <button class="btn watch-button" type="button" data-bs-toggle="modal" data-bs-target="#watch-<%= result["tmdb_id"] %>">WATCH</button>
             <button class="btn details-button" type="button" data-bs-toggle="modal" data-bs-target="#movie-<%= result["tmdb_id"] %>">DETAILS</button>
