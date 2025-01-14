@@ -52,23 +52,6 @@ class PagesController < ApplicationController
       end
       # raise
     end
-
-    # raise
-    # seed ={}
-    # url = "https://api.watchmode.com/v1/list-titles/?apiKey=#{ENV["API_KEY_WATCHMODE"]}&types=#{params[:format]}&source_ids=#{@streaming_services_ids}&source_types=sub&region=#{@country}&genres=#{params[:genre]}&release_date_start=#{params[:period]}&release_date_end=#{@release_date_end_s}&critic_score_low=8&limit=250"
-
-    # if seed.key?(url) == false
-    #   response = RestClient.get(url)
-    #   result_tt = JSON.parse(response)
-    #   seed[url] = result_tt
-    # end
-    # @result_titles = result_tt["titles"].sample(3)
-    # # raise
-    # @result = @result_titles.map do |title_infos|
-    #   titles_details_parse = RestClient.get "https://api.watchmode.com/v1/title/#{title_infos["imdb_id"]}/details/?apiKey=#{ENV["API_KEY_WATCHMODE"]}&append_to_response=sources"
-    #   JSON.parse(titles_details_parse)
-    # end
-    # @result = result_tt
   end
 
   def details
@@ -89,7 +72,7 @@ class PagesController < ApplicationController
       with_watch_providers: "#{@streaming_services_ids}",
       "with_runtime.lte" => "#{@runtime_min}",
       with_genres: "#{@genre}",
-      "primary_release_date.lte" => "#{Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d")}",
+      "primary_release_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
       # "with_runtime.lte" => "#{@runtime_min.to_i + 60}",
       "vote_average.gte" => 7
     }
@@ -109,7 +92,7 @@ class PagesController < ApplicationController
       with_watch_providers: "#{@streaming_services_ids}",
       # "with_runtime.gte" => "#{@runtime_min}",
       with_genres: "#{@genre}",
-      "first_air_date.lte" => "#{Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d")}",
+      "first_air_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
       # "with_runtime.lte" => "#{@runtime_min.to_i + 60}",
       "vote_average.gte" => 7
     }
