@@ -11,12 +11,10 @@ class PagesController < ApplicationController
   end
 
   def movies
-    # raise
     @vpn = current_user.vpn
     @country = current_user.country.code
     @streaming_services = current_user.streaming_services
     @streaming_names = @streaming_services.map { |service| service["name"] }
-    # raise
     @streaming_services_ids = @streaming_services.map { |streaming| streaming.source_id }.join('|')
     @release_date_start = params[:period]
     @runtime_min = params[:runtime]
@@ -124,13 +122,11 @@ class PagesController < ApplicationController
       end
     end
 
-
     tmdb_watch_providers = tmdb_watch_providers_page_link.empty? ? [] : scrape_tmdb_streaming_links(tmdb_watch_providers_page_link)
     final_result["watch_providers"] = filter_watch_providers(tmdb_watch_providers, user_subscribed_providers)
 
     trailer_condition = full_results["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }
     final_result["trailer_youtube_key"] = trailer_condition["key"] if trailer_condition
-    # final_result["trailer_youtube_key"] = full_results["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
     final_result
   end
 
@@ -143,24 +139,30 @@ class PagesController < ApplicationController
     final_result["genre"] = @genre
     final_result["tmdb_id"] = full_results["id"]
     watch_providers = full_results["watch/providers"]["results"][@country]
-    final_result["streaming_link"] = watch_providers["link"]
-    final_result["watch_providers"] = []
+    tmdb_watch_providers_page_link = watch_providers["link"]
+    user_subscribed_providers = []
+
+    user_subscribed_watch_providers = watch_providers["flatrate"].select { |provider| streaming_services_names.include?(provider['provider_name']) }
+
     watch_providers["flatrate"].each do |provider|
-      puts provider['provider_name']
       if streaming_services_names.include?(provider['provider_name'])
-        final_result["watch_providers"] << provider
+        user_subscribed_providers << provider
       end
     end
+
+    tmdb_watch_providers = tmdb_watch_providers_page_link.empty? ? [] : scrape_tmdb_streaming_links(tmdb_watch_providers_page_link)
+    final_result["watch_providers"] = filter_watch_providers(tmdb_watch_providers, user_subscribed_providers)
+
     trailer_condition = full_results["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }
     final_result["trailer_youtube_key"] = trailer_condition["key"] if trailer_condition
-    # final_result["trailer_youtube_key"] = full_results["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
-    final_result = final_result.transform_keys ({"name" => "title", "first_air_date" => "release_date"})
+
+    final_result = final_result.transform_keys({"name" => "title", "first_air_date" => "release_date"})
+
     return final_result
   end
 
   def scrape_tmdb_streaming_links(url)
     doc = Nokogiri::HTML.parse(RestClient.get(url), nil, "utf-8")
-
     streaming_providers = []
     return streaming_providers if url.empty?
 
@@ -175,7 +177,6 @@ class PagesController < ApplicationController
         "logo_path" => streaming_providers_link.search('img').first.attribute('src').value
       }
     end
-
     return streaming_providers
   end
 
