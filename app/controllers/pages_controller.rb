@@ -43,7 +43,6 @@ class PagesController < ApplicationController
       request_url = build_tmdb_url_movies
       response = RestClient.get(request_url, request_headers)
       result_tt = JSON.parse(response)
-      # @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
       @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
       @results = @result_ids.map do |result_id|
         details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
@@ -100,7 +99,6 @@ class PagesController < ApplicationController
   end
 
   def prepare_result(full_results)
-
     streaming_services_names = current_user.streaming_services.map do |streaming_services|
       streaming_services.name
     end
@@ -143,6 +141,7 @@ class PagesController < ApplicationController
 
     final_result = full_results.slice("backdrop_path", "id", "overview", "poster_path", "first_air_date", "name", "vote_average")
     final_result["genre"] = @genre
+    final_result["tmdb_id"] = full_results["id"]
     watch_providers = full_results["watch/providers"]["results"][@country]
     final_result["streaming_link"] = watch_providers["link"]
     final_result["watch_providers"] = []
