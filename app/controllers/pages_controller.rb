@@ -47,7 +47,6 @@ class PagesController < ApplicationController
         details = JSON.parse(details_serialized)
         prepare_result(details)
       end
-      raise
     end
   end
 
@@ -55,6 +54,16 @@ class PagesController < ApplicationController
   end
 
   private
+
+  def genre_format
+    if !@genre.nil?
+      if @genre.length == 1
+        @genre.join
+      else
+        @genre.join("|")
+      end
+    end
+  end
 
   def build_tmdb_url_movies
     base_url = "https://api.themoviedb.org/3/discover/movie"
@@ -68,7 +77,7 @@ class PagesController < ApplicationController
       with_watch_monetization_types: "flatrate",
       with_watch_providers: "#{@streaming_services_ids}",
       "with_runtime.lte" => "#{@runtime_min}",
-      with_genres: "#{@genre}",
+      with_genres: "#{genre_format()}",
       "primary_release_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
       # "with_runtime.lte" => "#{@runtime_min.to_i + 60}",
       "vote_average.gte" => 7
@@ -88,7 +97,7 @@ class PagesController < ApplicationController
       with_watch_monetization_types: "flatrate",
       with_watch_providers: "#{@streaming_services_ids}",
       # "with_runtime.gte" => "#{@runtime_min}",
-      with_genres: "#{@genre}",
+      with_genres: "#{genre_format()}",
       "first_air_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
       # "with_runtime.lte" => "#{@runtime_min.to_i + 60}",
       "vote_average.gte" => 7
@@ -107,7 +116,7 @@ class PagesController < ApplicationController
 
     final_result = full_results.slice("backdrop_path", "id", "overview", "poster_path", "release_date", "title", "vote_average", "runtime")
 
-    final_result["genre"] = @genre
+    final_result["genre"] = genre_format()
     final_result["tmdb_id"] = full_results["id"]
     watch_providers = full_results["watch/providers"]["results"][@country]
     tmdb_watch_providers_page_link = watch_providers["link"]
@@ -136,7 +145,7 @@ class PagesController < ApplicationController
     end
 
     final_result = full_results.slice("backdrop_path", "id", "overview", "poster_path", "first_air_date", "name", "vote_average")
-    final_result["genre"] = @genre
+    final_result["genre"] = genre_format()
     final_result["tmdb_id"] = full_results["id"]
     watch_providers = full_results["watch/providers"]["results"][@country]
     tmdb_watch_providers_page_link = watch_providers["link"]
