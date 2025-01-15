@@ -47,7 +47,7 @@ class PagesController < ApplicationController
         details = JSON.parse(details_serialized)
         prepare_result(details)
       end
-      # raise
+      raise
     end
   end
 
