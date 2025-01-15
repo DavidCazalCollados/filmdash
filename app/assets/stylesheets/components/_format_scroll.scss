@@ -48,6 +48,34 @@
   display: none;
 }
 
+// .check input {
+//   display: none;
+// }
+
+.check label {
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: center;
+  font-family: $body-font;
+  font-size: 1.2em;
+}
+
+.check {
+  object-fit: contain;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 115px;
+  // padding-right: 25%;
+  margin-right: 15px;
+  border-radius:3px;
+  width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .form-submit {
   padding-bottom: 25%;
 }
@@ -106,6 +134,15 @@
   }
 
   .radio-space label {
+    width: 600px;
+  }
+
+  .check {
+    height: 150px;
+    width: 260px;
+  }
+
+  .check label {
     width: 600px;
   }
 
