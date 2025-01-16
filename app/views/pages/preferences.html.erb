@@ -43,77 +43,77 @@
     <div class="section mt-4 marge-t-two">
       <h5>Genre</h5>
       <div class="d-flex scrolling">
-        <div class="radio-space" id="action-img">
-          <%= f.radio_button :genre, "28", id: '28' %>
-          <%= f.label :genre, "Action", for: "28" %>
+        <div class="check" id="action-img">
+          <%= f.check_box :genre, { multiple: true }, '28', nil %>
+          <%= f.label :genre, "Action", for: "genre_28" %>
         </div>
-        <div class="radio-space" id="adventure-img">
-          <%= f.radio_button :genre, "12", id: "12" %>
-          <%= f.label :genre, "Adventure", for: "12" %>
+        <div class="check" id="adventure-img">
+          <%= f.check_box :genre, { multiple: true }, "12", nil %>
+          <%= f.label :genre, "Adventure", for: "genre_12" %>
         </div>
-        <div class="radio-space" id="animation-img">
-          <%= f.radio_button :genre, "16", id: '16' %>
-          <%= f.label :genre, "Animation", for: "16" %>
+        <div class="check" id="animation-img">
+          <%= f.check_box :genre, { multiple: true }, '16', nil %>
+          <%= f.label :genre, "Animation", for: "genre_16" %>
         </div>
-        <div class="radio-space" id="comedy-img">
-          <%= f.radio_button :genre, "35", id: '35' %>
-          <%= f.label :genre, "Comedy", for: "35" %>
+        <div class="check" id="comedy-img">
+          <%= f.check_box :genre, { multiple: true }, '35', nil %>
+          <%= f.label :genre, "Comedy", for: "genre_35" %>
         </div>
-        <div class="radio-space" id="crime-img">
-          <%= f.radio_button :genre, "80", id: '80' %>
-          <%= f.label :genre, "Crime", for: "80" %>
+        <div class="check" id="crime-img">
+          <%= f.check_box :genre, { multiple: true }, '80', nil %>
+          <%= f.label :genre, "Crime", for: "genre_80" %>
         </div>
-        <div class="radio-space" id="docu-img">
-          <%= f.radio_button :genre, "99", id: '99' %>
-          <%= f.label :genre, "Documentary", for: "99" %>
+        <div class="check" id="docu-img">
+          <%= f.check_box :genre, { multiple: true }, '99', nil %>
+          <%= f.label :genre, "Documentary", for: "genre_99" %>
         </div>
-        <div class="radio-space" id="drama-img">
-          <%= f.radio_button :genre, "18", id: '18' %>
-          <%= f.label :genre, "Drama", for: "18" %>
+        <div class="check" id="drama-img">
+          <%= f.check_box :genre, { multiple: true }, '18', nil %>
+          <%= f.label :genre, "Drama", for: "genre_18" %>
         </div>
-        <div class="radio-space" id="family-img">
-          <%= f.radio_button :genre, "10751", id: '10751' %>
-          <%= f.label :genre, "Family", for: "10751" %>
+        <div class="check" id="family-img">
+          <%= f.check_box :genre, { multiple: true }, '10751', nil %>
+          <%= f.label :genre, "Family", for: "genre_10751" %>
         </div>
-        <div class="radio-space" id="fantasy-img">
-          <%= f.radio_button :genre, "14", id: '14' %>
-          <%= f.label :genre, "Fantasy", for: "14" %>
+        <div class="check" id="fantasy-img">
+          <%= f.check_box :genre, { multiple: true }, '14', nil %>
+          <%= f.label :genre, "Fantasy", for: "genre_14" %>
         </div>
-        <div class="radio-space" id="history-img">
-          <%= f.radio_button :genre, "36", id: '36' %>
-          <%= f.label :genre, "History", for: "36" %>
+        <div class="check" id="history-img">
+          <%= f.check_box :genre, { multiple: true }, '36', nil %>
+          <%= f.label :genre, "History", for: "genre_36" %>
         </div>
-        <div class="radio-space" id="horror-img">
-          <%= f.radio_button :genre, "27", id: '27' %>
-          <%= f.label :genre, "Horror", for: "27" %>
+        <div class="check" id="horror-img">
+          <%= f.check_box :genre, { multiple: true }, '27', nil %>
+          <%= f.label :genre, "Horror", for: "genre_27" %>
         </div>
-        <div class="radio-space" id="music-img">
-          <%= f.radio_button :genre, "10402", id: '10402' %>
-          <%= f.label :genre, "Music", for: "10402" %>
+        <div class="check" id="music-img">
+          <%= f.check_box :genre, { multiple: true }, '10402', nil %>
+          <%= f.label :genre, "Music", for: "genre_10402" %>
         </div>
-        <div class="radio-space" id="mystery-img">
-          <%= f.radio_button :genre, "9648", id: '9648' %>
-          <%= f.label :genre, "Mystery", for: "9648" %>
+        <div class="check" id="mystery-img">
+          <%= f.check_box :genre, { multiple: true }, '9648', nil %>
+          <%= f.label :genre, "Mystery", for: "genre_9648" %>
         </div>
-        <div class="radio-space" id="romance-img">
-          <%= f.radio_button :genre, "10749", id: '10749' %>
-          <%= f.label :genre, "Romance", for: "10749" %>
+        <div class="check" id="romance-img">
+          <%= f.check_box :genre, { multiple: true }, '10749', nil %>
+          <%= f.label :genre, "Romance", for: "genre_10749" %>
         </div>
-        <div class="radio-space" id="science-img">
-          <%= f.radio_button :genre, "878", id: '878' %>
-          <%= f.label :genre, "Science Fiction", for: "878" %>
+        <div class="check" id="science-img">
+          <%= f.check_box :genre, { multiple: true }, '878', nil %>
+          <%= f.label :genre, "Science Fiction", for: "genre_878" %>
         </div>
-        <div class="radio-space" id="thriller-img">
-          <%= f.radio_button :genre, "53", id: '53' %>
-          <%= f.label :genre, "Thriller", for: "53" %>
+        <div class="check" id="thriller-img">
+          <%= f.check_box :genre, { multiple: true }, '53', nil %>
+          <%= f.label :genre, "Thriller", for: "genre_53" %>
         </div>
-        <div class="radio-space" id="war-img">
-          <%= f.radio_button :genre, "10752", id: '10752' %>
-          <%= f.label :genre, "War", for: "10752" %>
+        <div class="check" id="war-img">
+          <%= f.check_box :genre, { multiple: true }, '10752', nil %>
+          <%= f.label :genre, "War", for: "genre_10752" %>
         </div>
-        <div class="radio-space" id="western-img">
-          <%= f.radio_button :genre, "37", id: '37' %>
-          <%= f.label :genre, "Western", for: "37" %>
+        <div class="check" id="western-img">
+          <%= f.check_box :genre, { multiple: true }, '37', nil %>
+          <%= f.label :genre, "Western", for: "genre_37" %>
         </div>
       </div>
     </div>
@@ -181,36 +181,49 @@
   </div> %>
 <script>
   document.addEventListener("turbo:load", function () {
-  const images = document.querySelectorAll(".radio-space");
+    const imagesGenre = document.querySelectorAll('.check');
+    const images = document.querySelectorAll(".radio-space");
 
-  for (let i = 0; i < images.length; i++) {
-    images[i].onclick = function(e) {
-      e.preventDefault();
+    if (imagesGenre.length > 0) {
+      imagesGenre.forEach(element => {
+        const idChecked = element.firstElementChild;
+        element.addEventListener('click', (e) => {
+          e.preventDefault();
+          element.classList.toggle('genre-checked')
+          idChecked.checked = !idChecked.checked;
+        });
+      });
+    }
 
-      const id = this.firstElementChild;
-      id.checked = true;
-      const children = this.parentElement.children;
+    if (images.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        images[i].onclick = function(e) {
+          e.preventDefault();
 
-      for (let j = 0; j < children.length; j++) {
-        if (id.checked === false) {
-          children[j].classList.remove("d-none");
-          children[j].classList.add("border");
-          children[j].classList.add("border-danger");
-          continue;
-        }
+          const id = this.firstElementChild;
+          id.checked = true;
+          const children = this.parentElement.children;
 
-        if (this === children[j]) {
-          children[j].classList.remove("d-none");
-          children[j].classList.add("border");
-          children[j].classList.add("border-danger");
-        } else {
-          children[j].classList.toggle("d-none");
-          children[j].classList.remove("border");
-          children[j].classList.remove("border-danger");
-        }
-      }
+          for (let j = 0; j < children.length; j++) {
+            if (id.checked === false) {
+              children[j].classList.remove("d-none");
+              children[j].classList.add("border");
+              continue;
+            }
+
+            if (this === children[j]) {
+              children[j].classList.remove("d-none");
+              children[j].classList.add("border");
+              children[j].classList.add("border-danger");
+            } else {
+              children[j].classList.toggle("d-none");
+              children[j].classList.remove("border");
+              children[j].classList.remove("border-danger");
+            }
+          }
+        };
+      };
     };
-  }
 });
 
 </script>
