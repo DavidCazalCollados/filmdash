@@ -181,18 +181,29 @@
   </div> %>
 <script>
   document.addEventListener("turbo:load", function () {
+    console.log("Turbo loaded");
     const imagesGenre = document.querySelectorAll('.check');
-    const images = document.querySelectorAll(".radio-space");
-
     if (imagesGenre.length > 0) {
       imagesGenre.forEach(element => {
-        const idChecked = element.firstElementChild;
+        const idChecked = this.firstElementChild;
+
         element.addEventListener('click', (e) => {
           e.preventDefault();
-          element.classList.toggle('genre-checked')
-          idChecked.checked = !idChecked.checked;
+          if (element.classList.contains('genre-checked')) {
+          element.classList.remove('genre-checked'); // Retirer la classe
+          idChecked.checked = false; // Décocher le checkbox
+        } else {
+          element.classList.add('genre-checked'); // Ajouter la classe
+          idChecked.checked = true; // Cocher le checkbox
+        }
         });
       });
+    };
+
+    const images = document.querySelectorAll(".radio-space");
+
+    for (let i = 0; i < images.length; i++) {
+      images[i].addEventListener('click', (b) => {})
     }
 
     if (images.length > 0) {
@@ -207,20 +218,18 @@
           for (let j = 0; j < children.length; j++) {
             if (id.checked === false) {
               children[j].classList.remove("d-none");
-              children[j].classList.add("border");
+              children[j].classList.add("genre-checked");
               continue;
             }
 
             if (this === children[j]) {
               children[j].classList.remove("d-none");
-              children[j].classList.add("border");
-              children[j].classList.add("border-danger");
+              children[j].classList.add("genre-checked");
             } else {
               children[j].classList.toggle("d-none");
-              children[j].classList.remove("border");
-              children[j].classList.remove("border-danger");
+              children[j].classList.remove("genre-checked");
             }
-          }
+          };
         };
       };
     };
