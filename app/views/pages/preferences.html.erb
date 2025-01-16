@@ -182,7 +182,9 @@
 <script>
   document.addEventListener("turbo:load", function () {
     console.log("Turbo loaded");
+    const images = document.querySelectorAll(".radio-space");
     const imagesGenre = document.querySelectorAll('.check');
+
     if (imagesGenre.length > 0) {
       imagesGenre.forEach(element => {
         const idChecked = this.firstElementChild;
@@ -197,10 +199,23 @@
           idChecked.checked = true; // Cocher le checkbox
         }
         });
+
+        element.addEventListener('mouseenter', (event) => { //initialisation de la souris qui passe par dessus un element
+
+          imagesGenre.forEach(otherElement => {
+            if (otherElement !== element) {
+              otherElement.style.transform = 'scale(0.9)';
+            }
+            element.style.transform = 'scale(1.1)'
+          });
+        });
+        element.addEventListener('mouseleave', (event) => {
+          imagesGenre.forEach(otherElement => {
+            otherElement.style.transform = 'scale(1)'
+          })
+        })
       });
     };
-
-    const images = document.querySelectorAll(".radio-space");
 
     for (let i = 0; i < images.length; i++) {
       images[i].addEventListener('click', (b) => {})
