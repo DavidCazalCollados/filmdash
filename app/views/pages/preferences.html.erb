@@ -187,74 +187,80 @@
     const imagesGenre = document.querySelectorAll('.check');
 
 
-    imagesGenre.forEach(element => {
-      const idChecked = element.firstElementChild;
-      element.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (element.classList.contains('genre-checked')) {
-        element.classList.remove('genre-checked'); // Retirer la classe
-        idChecked.checked = false; // Décocher le checkbox
-      } else {
-        element.classList.add('genre-checked'); // Ajouter la classe
-        idChecked.checked = true; // Cocher le checkbox
-      }
-      });
-      element.addEventListener('mouseenter', (event) => { //initialisation de la souris qui passe par dessus un element
-        imagesGenre.forEach(otherElement => {
-          if (otherElement !== element) {
-            otherElement.style.transform = 'scale(0.98)';
-          }
-          element.style.transform = 'scale(1.07)'
-        });
-      });
-      element.addEventListener('mouseleave', (event) => {
-        imagesGenre.forEach(otherElement => {
-          otherElement.style.transform = 'scale(1)'
-        })
-      })
-    });
-
-
-    images.forEach(image => {
-      const id = image.firstElementChild;
-      const otherImages = Array.from(image.parentElement.children);
-      id.checked = false;
-      image.addEventListener('click', (e) => {
-        e.preventDefault();
-        image.classList.toggle('genre-checked');
-        id.checked = !id.checked;
-        otherImages.forEach(otherImage => {
-          const otherImageChild = otherImage.firstElementChild;
-          if (otherImage !== image) {
-            otherImage.classList.toggle('d-none')
-            otherImageChild.checked = false;
-          };
-        });
-      });
-      // image.addEventListener('click', )
-    });
-    // for (let i = 0; i < images.length; i++) {
-    //   images[i].onclick = function(e) {
+    // imagesGenre.forEach(element => {
+    //   const idChecked = element.firstElementChild;
+    //   element.addEventListener('click', (e) => {
     //     e.preventDefault();
-    //     const id = this.firstElementChild;
-    //     id.checked = true;
-    //     const children = this.parentElement.children;
-    //     for (let j = 0; j < children.length; j++) {
-    //       if (id.checked === false) {
-    //         children[j].classList.remove("d-none");
-    //         children[j].classList.add("genre-checked");
-    //         continue;
-    //       }
-    //       if (this === children[j]) {
-    //         children[j].classList.remove("d-none");
-    //         children[j].classList.add("genre-checked");
-    //       } else {
-    //         children[j].classList.toggle("d-none");
-    //         children[j].classList.remove("genre-checked");
-    //       }
-    //     };
-    //   };
-    // };
-});
+    //     if (element.classList.contains('genre-checked')) {
+    //     element.classList.remove('genre-checked'); // Retirer la classe
+    //     idChecked.checked = false; // Décocher le checkbox
+    //   } else {
+    //     element.classList.add('genre-checked'); // Ajouter la classe
+    //     idChecked.checked = true; // Cocher le checkbox
+    //   }
+    //   });
+
+    // element.addEventListener('mouseenter', (event) => { //initialisation de la souris qui passe par dessus un element
+    //   imagesGenre.forEach(otherElement => {
+    //     if (otherElement !== element) {
+    //       otherElement.style.transform = 'scale(0.98)';
+    //     }
+    //     element.style.transform = 'scale(1.07)'
+    //   });
+    // });
+    // element.addEventListener('mouseleave', (event) => {
+    //   imagesGenre.forEach(otherElement => {
+    //     otherElement.style.transform = 'scale(1)'
+    //   })
+    // })
+
+    for (let k = 0; k < imagesGenre.length; k++) {
+      const idChecked = imagesGenre[k].firstElementChild;
+      imagesGenre[k].onclick = function(c) {
+        c.preventDefault();
+        if (imagesGenre[k].classList.contains('genre-checked')) {
+          imagesGenre[k].classList.remove('genre-checked')
+          idChecked.checked = false
+        } else {
+          imagesGenre[k].classList.add('genre-checked')
+          idChecked.checked = true
+        }
+      };
+    };
+
+    // images.forEach(image => {
+    //   const id = image.firstElementChild;
+    //   const otherImages = Array.from(image.parentElement.children);
+    //   id.checked = false;
+    //   image.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     image.classList.toggle('genre-checked');
+    //     id.checked = !id.checked;
+    //     otherImages.forEach(otherImage => {
+    //       const otherImageChild = otherImage.firstElementChild;
+    //       if (otherImage !== image) {
+    //         otherImage.classList.toggle('d-none')
+    //         otherImageChild.checked = false;
+    //       };
+    //     });
+    //   });
+    // });
+    for (let i = 0; i < images.length; i++) {
+      const id = images[i].firstElementChild;
+      images[i].onclick = function(e) {
+        id.checked = !id.checked;
+        e.preventDefault();
+        this.classList.toggle('genre-checked')
+        const children = this.parentElement.children;
+        for (let j = 0; j < children.length; j++) {
+            const firstChild = children[j].firstElementChild
+            if (children[j] !== images[i]) {
+              children[j].classList.toggle('d-none')
+              firstChild.checked = false
+            };
+        };
+      };
+    };
+  });
 
 </script>
