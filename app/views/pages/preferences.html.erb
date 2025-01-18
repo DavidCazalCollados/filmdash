@@ -228,23 +228,7 @@
       };
     };
 
-    // images.forEach(image => {
-    //   const id = image.firstElementChild;
-    //   const otherImages = Array.from(image.parentElement.children);
-    //   id.checked = false;
-    //   image.addEventListener('click', (e) => {
-    //     e.preventDefault();
-    //     image.classList.toggle('genre-checked');
-    //     id.checked = !id.checked;
-    //     otherImages.forEach(otherImage => {
-    //       const otherImageChild = otherImage.firstElementChild;
-    //       if (otherImage !== image) {
-    //         otherImage.classList.toggle('d-none')
-    //         otherImageChild.checked = false;
-    //       };
-    //     });
-    //   });
-    // });
+
     for (let i = 0; i < images.length; i++) {
       const id = images[i].firstElementChild;
       images[i].onclick = function(e) {
