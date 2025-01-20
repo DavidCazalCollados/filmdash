@@ -48,6 +48,7 @@ class PagesController < ApplicationController
         prepare_result(details)
       end
     end
+    # raise
   end
 
   def details

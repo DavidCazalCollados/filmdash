@@ -1,4 +1,7 @@
 import { Application } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails";
+
+Turbo.setFormMode("on")
 
 const application = Application.start()
 
