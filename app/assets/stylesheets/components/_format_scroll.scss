@@ -33,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: .2s ease transform;
 }
 
 .radio-space label {
@@ -45,11 +46,11 @@
 }
 
 .radio-space input {
-  display: none;
+  // display: none;
 }
 
 .check input {
-  display: none;
+  // display: none;
 }
 
 .check label {
@@ -74,6 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: .2s ease transform;
 }
 
 .genre-checked {
@@ -141,6 +143,7 @@
   .radio-space {
     height: 150px;
     width: 260px;
+    // transition: .2s ease transform;
   }
 
   .radio-space label {
@@ -150,7 +153,7 @@
   .check {
     height: 150px;
     width: 260px;
-    transition: .2s ease transform;
+    // transition: .2s ease transform;
     // background-color: brown;
   }
 
