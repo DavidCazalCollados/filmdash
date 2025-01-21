@@ -187,11 +187,10 @@
     const imagesGenre = document.querySelectorAll('.check');
     let laptopDimensions = window.matchMedia("(min-width: 768px)");
 
-
+    // Genre Selection Function
     const clickGenre = (criteria, id) => {
       criteria.onclick = (e) => {
         e.preventDefault()
-        const id = criteria.firstElementChild;
         if (criteria.classList.contains('genre-checked')) {
           criteria.classList.remove('genre-checked')
           id.checked = false
@@ -202,6 +201,28 @@
       };
     };
 
+
+    // Hover Enter Function
+    const hoverEnterCriteria = (criteria, childrenId) => {
+        if (childrenId !== criteria) {
+          childrenId.style.transform = 'scale(0.98)';
+        }
+        criteria.style.transform = 'scale(1.07)'
+    };
+
+
+    // Hover Leave Function
+    const hoverLeaveCriteria = (criteria, childrenId) => {
+      if (childrenId !== criteria) {
+        childrenId.style.transform = 'scale(1)'
+      }
+    };
+
+
+    // Global Hover Function
+
+
+    // Media: Laptop Size
     const laptopMedia = (criteria) => {
       criteria.onmousedown = () => {
         criteria.style.transform = 'scale(0.98)'
@@ -210,25 +231,21 @@
         criteria.style.transform = 'scale(1.07)'
       };
       criteria.onmouseenter = () => {
-        const childrenHover = criteria.parentElement.children;
-        for (let b = 0; b < childrenHover.length; b++) {
-          if (childrenHover[b] !== criteria) {
-            childrenHover[b].style.transform = 'scale(0.98)';
-          }
-          criteria.style.transform = 'scale(1.07)'
+        const childrenId = criteria.parentElement.children;
+        for (let b = 0; b < childrenId.length; b++) {
+          hoverEnterCriteria(criteria, childrenId[b]);
         }
       };
       criteria.onmouseleave = () => {
-        const childrenLeave = criteria.parentElement.children;
-        for (let e = 0; e < childrenLeave.length; e++) {
-          if (childrenLeave[e] !== criteria) {
-            childrenLeave[e].style.transform = 'scale(1)'
-          };
+        const childrenId = criteria.parentElement.children;
+        for (let e = 0; e < childrenId.length; e++) {
+          hoverLeaveCriteria(criteria, childrenId[e])
         };
         criteria.style.transform = 'scale(1)'
       };
     };
 
+    //Media: Phone Size
     const phoneMedia = (criteria) => {
       criteria.ontouchstart = (e) => {
         criteria.style.transform = 'scale(0.9)'
@@ -238,11 +255,16 @@
       };
     };
 
+
+    // Function for Genres
     const globalFunGenre = (criteria) => {
       for (let i = 0; i < criteria.length; i++) {
-        clickGenre(criteria[i]);
+        let id = criteria[i].firstElementChild;
 
-        // Media size condition for genre criteria
+        // Select a genre
+        clickGenre(criteria[i], id);
+
+        // Media size condition for genres
         if (laptopDimensions.matches) {
           laptopMedia(criteria[i])
         } else {
@@ -252,6 +274,43 @@
     };
 
     globalFunGenre(imagesGenre);
+
+
+    // Function Click other Criteria
+    const clickCriteria = (criteria, id) => {
+      criteria.onclick = (e) => {
+        e.preventDefault();
+        id.checked = !id.checked;
+        criteria.classList.toggle('genre-checked')
+        const children = criteria.parentElement.children;
+        for (let j = 0; j < children.length; j++) {
+            const firstChild = children[j].firstElementChild
+            if (children[j] !== criteria) {
+              children[j].classList.toggle('d-none')
+              firstChild.checked = false
+            };
+        };
+      };
+    };
+
+    const globalFunCriteria = (criteria) => {
+      for (let i = 0; i < criteria.length; i++) {
+        let id = criteria[i].firstElementChild;
+
+        // Select a criteria
+        clickCriteria(criteria[i], id)
+
+        // Media size condition for criteria
+        if (laptopDimensions.matches) {
+          laptopMedia(criteria[i])
+        } else {
+          phoneMedia(criteria[i])
+        };
+      };
+    };
+
+    globalFunCriteria(images);
+
 
 
 
@@ -309,61 +368,61 @@
     // };
 
     // For the other criteria:
-    for (let i = 0; i < images.length; i++) {
-      const id = images[i].firstElementChild;
+    // for (let i = 0; i < images.length; i++) {
+    //   const id = images[i].firstElementChild;
 
-      images[i].onclick = function(e) {
-        e.preventDefault();
-        id.checked = !id.checked;
+    //   images[i].onclick = function(e) {
+    //     e.preventDefault();
+    //     id.checked = !id.checked;
 
-        this.classList.toggle('genre-checked')
-        const children = this.parentElement.children;
-        for (let j = 0; j < children.length; j++) {
-            const firstChild = children[j].firstElementChild
-            if (children[j] !== images[i]) {
-              children[j].classList.toggle('d-none')
-              firstChild.checked = false
-            };
-        };
-      };
+    //     this.classList.toggle('genre-checked')
+    //     const children = this.parentElement.children;
+    //     for (let j = 0; j < children.length; j++) {
+    //         const firstChild = children[j].firstElementChild
+    //         if (children[j] !== images[i]) {
+    //           children[j].classList.toggle('d-none')
+    //           firstChild.checked = false
+    //         };
+    //     };
+    //   };
 
-      // Dimension condition
-      if (laptopDimensions.matches) {
-        images[i].onmousedown = () => {
-          images[i].style.transform = 'scale(0.98)'
-        };
-        images[i].onmouseup = () => {
-          images[i].style.transform = 'scale(1.07)'
-        };
+    //   // Dimension condition
+    //   if (laptopDimensions.matches) {
+    //     images[i].onmousedown = () => {
+    //       images[i].style.transform = 'scale(0.98)'
+    //     };
+    //     images[i].onmouseup = () => {
+    //       images[i].style.transform = 'scale(1.07)'
+    //     };
 
-        images[i].onmouseenter = function() {
-          const childrenHover = this.parentElement.children;
-          for (let b = 0; b < childrenHover.length; b++) {
-            if (childrenHover[b] !== images[i]) {
-              childrenHover[b].style.transform = 'scale(0.98)';
-            }
-            images[i].style.transform = 'scale(1.07)'
-          }
-        };
+    //     images[i].onmouseenter = function() {
+    //       const childrenHover = this.parentElement.children;
+    //       for (let b = 0; b < childrenHover.length; b++) {
+    //         if (childrenHover[b] !== images[i]) {
+    //           childrenHover[b].style.transform = 'scale(0.98)';
+    //         }
+    //         images[i].style.transform = 'scale(1.07)'
+    //       }
+    //     };
 
-        images[i].onmouseleave = function(e) {
-          const childrenLeave = this.parentElement.children;
-          for (let e = 0; e < childrenLeave.length; e++) {
-            if (childrenLeave[e] !== images[i]) {
-              childrenLeave[e].style.transform = 'scale(1)'
-            };
-          };
-          images[i].style.transform = 'scale(1)'
-        };
-      } else {
-        images[i].ontouchstart = (e) => {
-          images[i].style.transform = 'scale(0.9)'
-        };
-        images[i].ontouchend = (e) => {
-          images[i].style.transform = 'scale(1)'
-        };
-      };
-    };
+    //     images[i].onmouseleave = function(e) {
+    //       const childrenLeave = this.parentElement.children;
+    //       for (let e = 0; e < childrenLeave.length; e++) {
+    //         if (childrenLeave[e] !== images[i]) {
+    //           childrenLeave[e].style.transform = 'scale(1)'
+    //         };
+    //       };
+    //       images[i].style.transform = 'scale(1)'
+    //     };
+    //   } else {
+    //     images[i].ontouchstart = (e) => {
+    //       images[i].style.transform = 'scale(0.9)'
+    //     };
+    //     images[i].ontouchend = (e) => {
+    //       images[i].style.transform = 'scale(1)'
+    //     };
+    //   };
+    // };
   });
 
 </script>
