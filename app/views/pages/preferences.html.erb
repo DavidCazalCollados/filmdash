@@ -219,9 +219,6 @@
     };
 
 
-    // Global Hover Function
-
-
     // Media: Laptop Size
     const laptopMedia = (criteria) => {
       criteria.onmousedown = () => {
@@ -310,119 +307,6 @@
     };
 
     globalFunCriteria(images);
-
-
-
-
-    // For format:
-    // for (let k = 0; k < imagesGenre.length; k++) {
-      // const idChecked = imagesGenre[k].firstElementChild;
-
-      // imagesGenre[k].onclick = (e) => {
-      //   e.preventDefault()
-      //   if (imagesGenre[k].classList.contains('genre-checked')) {
-      //     imagesGenre[k].classList.remove('genre-checked')
-      //     idChecked.checked = false
-      //   } else {
-      //     imagesGenre[k].classList.add('genre-checked')
-      //     idChecked.checked = true
-      //   }
-      // };
-
-      // Dimension condition
-    //   if (laptopDimensions.matches) {
-    //     imagesGenre[k].onmousedown = (e) => {
-    //       imagesGenre[k].style.transform = 'scale(0.98)'
-    //     };
-    //     imagesGenre[k].onmouseup = (e) => {
-    //       imagesGenre[k].style.transform = 'scale(1.07)'
-    //     };
-
-    //     imagesGenre[k].onmouseenter = function() {
-    //       const childrenHover = this.parentElement.children;
-    //       for (let b = 0; b < childrenHover.length; b++) {
-    //         if (childrenHover[b] !== imagesGenre[k]) {
-    //           childrenHover[b].style.transform = 'scale(0.98)';
-    //         }
-    //         imagesGenre[k].style.transform = 'scale(1.07)'
-    //       }
-    //     };
-
-    //     imagesGenre[k].onmouseleave = function(e) {
-    //       const childrenLeave = this.parentElement.children;
-    //       for (let e = 0; e < childrenLeave.length; e++) {
-    //         if (childrenLeave[e] !== imagesGenre[k]) {
-    //           childrenLeave[e].style.transform = 'scale(1)'
-    //         };
-    //       };
-    //       imagesGenre[k].style.transform = 'scale(1)'
-    //     };
-    //   } else {
-    //     imagesGenre[k].ontouchstart = (e) => {
-    //       imagesGenre[k].style.transform = 'scale(0.9)'
-    //     };
-    //     imagesGenre[k].ontouchend = (e) => {
-    //       imagesGenre[k].style.transform = 'scale(1)'
-    //     };
-    //   };
-    // };
-
-    // For the other criteria:
-    // for (let i = 0; i < images.length; i++) {
-    //   const id = images[i].firstElementChild;
-
-    //   images[i].onclick = function(e) {
-    //     e.preventDefault();
-    //     id.checked = !id.checked;
-
-    //     this.classList.toggle('genre-checked')
-    //     const children = this.parentElement.children;
-    //     for (let j = 0; j < children.length; j++) {
-    //         const firstChild = children[j].firstElementChild
-    //         if (children[j] !== images[i]) {
-    //           children[j].classList.toggle('d-none')
-    //           firstChild.checked = false
-    //         };
-    //     };
-    //   };
-
-    //   // Dimension condition
-    //   if (laptopDimensions.matches) {
-    //     images[i].onmousedown = () => {
-    //       images[i].style.transform = 'scale(0.98)'
-    //     };
-    //     images[i].onmouseup = () => {
-    //       images[i].style.transform = 'scale(1.07)'
-    //     };
-
-    //     images[i].onmouseenter = function() {
-    //       const childrenHover = this.parentElement.children;
-    //       for (let b = 0; b < childrenHover.length; b++) {
-    //         if (childrenHover[b] !== images[i]) {
-    //           childrenHover[b].style.transform = 'scale(0.98)';
-    //         }
-    //         images[i].style.transform = 'scale(1.07)'
-    //       }
-    //     };
-
-    //     images[i].onmouseleave = function(e) {
-    //       const childrenLeave = this.parentElement.children;
-    //       for (let e = 0; e < childrenLeave.length; e++) {
-    //         if (childrenLeave[e] !== images[i]) {
-    //           childrenLeave[e].style.transform = 'scale(1)'
-    //         };
-    //       };
-    //       images[i].style.transform = 'scale(1)'
-    //     };
-    //   } else {
-    //     images[i].ontouchstart = (e) => {
-    //       images[i].style.transform = 'scale(0.9)'
-    //     };
-    //     images[i].ontouchend = (e) => {
-    //       images[i].style.transform = 'scale(1)'
-    //     };
-    //   };
-    // };
   });
 
 </script>
