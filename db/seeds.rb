@@ -266,7 +266,7 @@ streaming_services_array = [
   {name: "Amazon Prime Video", source_id: 119},
   {name: "Disney Plus", source_id: 337},
   {name: "Apple TV Plus", source_id: 350},
-  # {name: "Paramount Plus", source_id: 531},
+  {name: "Canal+", source_id: 381},
   {name: "Crave", source_id: 230},
   {name: "Peacock Premium", source_id: 386},
   {name: "iciTouTV", source_id: 146},
