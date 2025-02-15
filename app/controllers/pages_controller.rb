@@ -39,13 +39,29 @@ class PagesController < ApplicationController
       end
     else
       request_url = build_tmdb_url_movies
+      request_url_canal = build_tmdb_url_movies_canal
       response = RestClient.get(request_url, request_headers)
       result_tt = JSON.parse(response)
-      @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
-      @results = @result_ids.map do |result_id|
-        details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
-        details = JSON.parse(details_serialized)
-        prepare_result(details)
+      if @streaming_services.exists?(source_id: 381) && @country != "FR"
+        response_canal = RestClient.get(request_url_canal, request_headers)
+        result_tt_canal = JSON.parse(response_canal)
+        @result_ids_canal = result_tt_canal["results"].sample(3).map { |movie| movie["id"] }
+        @result_ids_norm = result_tt["results"].sample(3).map { |movie| movie["id"] }
+        @result_ids_six = @result_ids_canal + @result_ids_norm
+        @result_ids = @result_ids_six.sample(3)
+        @results = @result_ids.map do |result_id|
+          details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
+          details = JSON.parse(details_serialized)
+          prepare_result(details)
+        end
+      else
+        @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
+        @results = @result_ids.map do |result_id|
+          details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
+          details = JSON.parse(details_serialized)
+          prepare_result(details)
+          # raise
+        end
       end
     end
     # raise
@@ -64,6 +80,25 @@ class PagesController < ApplicationController
         @genre.join("|")
       end
     end
+  end
+
+  def build_tmdb_url_movies_canal
+    base_url = "https://api.themoviedb.org/3/discover/movie"
+    params = {
+      include_adult: false,
+      include_video: false,
+      page: 1,
+      sort_by: "popularity.desc",
+      watch_region: "FR",
+      "primary_release_date.gte" => "#{@release_date_start}",
+      with_watch_monetization_types: "flatrate",
+      with_watch_providers: "381",
+      "with_runtime.lte" => "#{@runtime_min}",
+      with_genres: "#{genre_format()}",
+      "primary_release_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
+      "vote_average.gte" => 7
+    }
+    return "#{base_url}?#{params.map { |key, value| "#{key}=#{value}" }.join('&')}"
   end
 
   def build_tmdb_url_movies
