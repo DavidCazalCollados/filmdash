@@ -42,6 +42,7 @@ class PagesController < ApplicationController
       request_url_canal = build_tmdb_url_movies_canal
       response = RestClient.get(request_url, request_headers)
       result_tt = JSON.parse(response)
+
       if @streaming_services.exists?(source_id: 381) && @country != "FR"
         response_canal = RestClient.get(request_url_canal, request_headers)
         result_tt_canal = JSON.parse(response_canal)
@@ -53,6 +54,7 @@ class PagesController < ApplicationController
           details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
           details = JSON.parse(details_serialized)
           prepare_result(details)
+          raise
         end
       else
         @result_ids = result_tt["results"].sample(3).map { |movie| movie["id"] }
@@ -60,11 +62,9 @@ class PagesController < ApplicationController
           details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{result_id}?append_to_response=videos,watch/providers", request_headers)
           details = JSON.parse(details_serialized)
           prepare_result(details)
-          # raise
         end
       end
     end
-    # raise
   end
 
   def details
@@ -125,17 +125,14 @@ class PagesController < ApplicationController
     base_url = "https://api.themoviedb.org/3/discover/tv"
     params = {
       include_adult: false,
-      # include_null_first_air_dates: false,
       page: 1,
       sort_by: "popularity.desc",
       watch_region: "#{@country}",
       "first_air_date.gte" => "#{@release_date_start}",
       with_watch_monetization_types: "flatrate",
       with_watch_providers: "#{@streaming_services_ids}",
-      # "with_runtime.gte" => "#{@runtime_min}",
       with_genres: "#{genre_format()}",
       "first_air_date.lte" => "#{@release_date_start.present? ? Date.parse(@release_date_start).advance(years: 10).strftime("%Y-%m-%d") : ""}",
-      # "with_runtime.lte" => "#{@runtime_min.to_i + 60}",
       "vote_average.gte" => 7
     }
     return "#{base_url}?#{params.map { |key, value| "#{key}=#{value}" }.join('&')}"
@@ -161,7 +158,6 @@ class PagesController < ApplicationController
     user_subscribed_watch_providers = watch_providers["flatrate"].select { |provider| streaming_services_names.include?(provider['provider_name']) }
 
     watch_providers["flatrate"].each do |provider|
-      # puts provider['provider_name']
       if streaming_services_names.include?(provider['provider_name'])
         user_subscribed_providers << provider
       end
