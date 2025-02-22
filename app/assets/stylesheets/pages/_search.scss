@@ -4,10 +4,36 @@
   padding-top: 8vh;
   padding-left: 10vw;
   padding-right: 10vw;
+  padding-bottom: 0;
 }
 
 .input-search {
   width: auto;
   margin-left: 10vw;
   margin-right: 10vw;
+}
+
+.result-search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-search-grid {
+  width: 87%;
+  gap: 2vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.poster-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.poster-container {
+  height: 107px;
+  width: 23.2%;
 }
