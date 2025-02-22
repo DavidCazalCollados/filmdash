@@ -54,6 +54,9 @@ class PagesController < ApplicationController
   def details
   end
 
+  def search
+  end
+
   private
 
   def genre_format
