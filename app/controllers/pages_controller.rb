@@ -55,6 +55,7 @@ class PagesController < ApplicationController
   end
 
   def search
+    @api_key = @api_key = ENV['API_KEY']
   end
 
   private
