@@ -55,7 +55,10 @@ class PagesController < ApplicationController
   end
 
   def search
-    @api_key = @api_key = ENV['API_KEY']
+    @request_headers = {
+      Authorization: "Bearer #{ENV['API_KEY_TMDB']}",
+      Accept: "application/json"
+    }
   end
 
   private

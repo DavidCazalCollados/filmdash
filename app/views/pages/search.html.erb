@@ -12,9 +12,6 @@
 
 <div class="result-search-container">
   <div class="result-search-grid">
-    <div class="poster-container">
-      <img src="https://images.squarespace-cdn.com/content/v1/63bb3e8a824d7e2f7eedf0d3/b5b0f347-d67e-4605-8338-a5c3ef890f95/Queer+4.jpeg?format=500w" alt="">
-    </div>
   </div>
 </div>
 
@@ -25,7 +22,37 @@
   console.log('Hello');
 });
 
-const omdbapiUrl = "http://www.omdbapi.com/";
-const apiKey = "<%= @api_key %>";
+const tmdbapiUrl = "https://api.themoviedb.org/3/search/multi";
+const requestHeaders = <%= raw @request_headers.to_json %>;
+
+document.getElementById("button-addon2").addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const title =document.querySelector(".form-control").value;
+  fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}`, {
+        method: 'GET',
+        headers: requestHeaders
+      })
+    .then(response => response.json())
+    .then(data => appendMoviesToDom(data.results));
+});
+
+const appendMoviesToDom = (movies) => {
+  console.log(movies);
+  const moviesContainer = document.querySelector(".result-search-grid");
+  moviesContainer.innerHTML = ""; // Clear the previous results if any
+  movies.forEach((movie) => {
+    cardHTML = createMoviePoster(movie);
+    moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
+  });
+};
+
+const createMoviePoster = (movie) => {
+  return `
+    <div class="poster-container">
+      <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt=${movie.title}>
+    </div>
+  `;
+};
 
 </script>
