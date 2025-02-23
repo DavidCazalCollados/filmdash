@@ -18,42 +18,63 @@
 
 
 <script>
+
   document.addEventListener('DOMContentLoaded', function() {
   console.log('Hello');
-});
+  });
 
-const tmdbapiUrl = "https://api.themoviedb.org/3/search/multi";
-const requestHeaders = <%= raw @request_headers.to_json %>;
+  const tmdbapiUrl = "https://api.themoviedb.org/3/search/multi";
+  const requestHeaders = <%= raw @request_headers.to_json %>;
 
-document.getElementById("button-addon2").addEventListener('click', (e) => {
-  e.preventDefault();
+  document.getElementById("button-addon2").addEventListener('click', (e) => {
+    e.preventDefault();
 
-  const title =document.querySelector(".form-control").value;
-  fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}`, {
-        method: 'GET',
-        headers: requestHeaders
+    const moviesContainer = document.querySelector(".result-search-grid");
+
+    const title = document.querySelector(".form-control").value;
+    moviesContainer.innerHTML = ""; // Clearing the previous results
+
+    // Searching for the first page
+    fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}`, {
+          method: 'GET',
+          headers: requestHeaders
+        })
+      .then(response => response.json())
+      .then(data => {
+        appendMoviesToDom(data.results);
+        // Looping on all pages
+        for (let i = 2; i < data.total_pages; i++) {
+          fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}&page=${i}`, {
+            method: 'GET',
+            headers: requestHeaders
+          })
+            .then(response => response.json())
+            .then(data => appendMoviesToDom(data.results))
+            .catch(error => console.error('Error fetching page ' + i, error));
+        }
       })
-    .then(response => response.json())
-    .then(data => appendMoviesToDom(data.results));
-});
+    }
+  );
 
-const appendMoviesToDom = (movies) => {
-  console.log(movies);
-  const moviesContainer = document.querySelector(".result-search-grid");
-  moviesContainer.innerHTML = ""; // Clear the previous results if any
-  movies.forEach((movie) => {
-    if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
-      cardHTML = createMoviePoster(movie);
-      moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
-  }});
-};
 
-const createMoviePoster = (movie) => {
-    return `
-      <div class="poster-container">
-        <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${movie.title}">
-      </div>
-  `
-};
+  const appendMoviesToDom = (movies) => {
+    console.log(movies);
+    const moviesContainer = document.querySelector(".result-search-grid");
+    movies.forEach((movie) => {
+      if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
+        cardHTML = createMoviePoster(movie);
+        moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
+    } else {
+      moviesContainer.insertAdjacentHTML('beforeend', "");
+    }});
+  };
+
+  const createMoviePoster = (movie) => {
+      return `
+        <div class="poster-container">
+          <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${movie.title}">
+        </div>
+    `
+  };
 
 </script>
