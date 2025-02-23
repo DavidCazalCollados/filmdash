@@ -42,17 +42,18 @@ const appendMoviesToDom = (movies) => {
   const moviesContainer = document.querySelector(".result-search-grid");
   moviesContainer.innerHTML = ""; // Clear the previous results if any
   movies.forEach((movie) => {
-    cardHTML = createMoviePoster(movie);
-    moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
-  });
+    if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
+      cardHTML = createMoviePoster(movie);
+      moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
+  }});
 };
 
 const createMoviePoster = (movie) => {
-  return `
-    <div class="poster-container">
-      <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt=${movie.title}>
-    </div>
-  `;
+    return `
+      <div class="poster-container">
+        <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${movie.title}">
+      </div>
+  `
 };
 
 </script>
