@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   # Routes for the research page
   get "/search", to: "pages#search", as: :search
+  get 'search/:media_type/:id', to: 'pages#show', as: :search_details
 
   resources :movie_watchlists, only: [:index, :show, :create, :destroy]
   get 'details', to: 'pages#details'

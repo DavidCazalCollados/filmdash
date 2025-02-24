@@ -48,7 +48,6 @@ class PagesController < ApplicationController
         prepare_result(details)
       end
     end
-    # raise
   end
 
   def details
@@ -59,6 +58,30 @@ class PagesController < ApplicationController
       Authorization: "Bearer #{ENV['API_KEY_TMDB']}",
       Accept: "application/json"
     }
+  end
+
+  def show
+    @movie_id = params[:id]
+    @media_type = params[:media_type]
+    @country = current_user.country.code
+    request_headers = {
+      Authorization: "Bearer #{ENV["API_KEY_TMDB"]}",
+      accept: "application/JSON"
+    }
+
+    if params[:media_type] == "tv"
+      details_serialized = RestClient.get("https://api.themoviedb.org/3/tv/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
+      result_international = JSON.parse(details_serialized)
+      @result = {
+        title: result_international["name"]
+      }
+    else
+      details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
+      result_international = JSON.parse(details_serialized)
+      @result = {
+        title: result_international["original_title"]
+      }
+    end
   end
 
   private

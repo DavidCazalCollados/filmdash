@@ -68,10 +68,14 @@
 
 
   const createMoviePoster = (movie) => {
-      return `
-        <div class="poster-container">
+    const movieLink = `/search/${movie.media_type}/${movie.id}`;
+
+    return `
+      <div class="poster-container">
+        <a href="${movieLink}">
           <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${movie.title}">
-        </div>
+        </a>
+      </div>
     `
   };
 
