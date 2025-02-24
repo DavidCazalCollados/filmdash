@@ -19,43 +19,39 @@
 
 <script>
 
-  document.addEventListener('DOMContentLoaded', function() {
-  console.log('Hello');
-  });
-
   const tmdbapiUrl = "https://api.themoviedb.org/3/search/multi";
   const requestHeaders = <%= raw @request_headers.to_json %>;
 
+  const moviesContainer = document.querySelector(".result-search-grid");
+
+  const title = document.querySelector(".form-control");
+
   document.getElementById("button-addon2").addEventListener('click', (e) => {
-    e.preventDefault();
-
-    const moviesContainer = document.querySelector(".result-search-grid");
-
-    const title = document.querySelector(".form-control").value;
+    e.preventDefault()
+    const titleValue = document.querySelector(".form-control").value;
     moviesContainer.innerHTML = ""; // Clearing the previous results
 
     // Searching for the first page
-    fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}`, {
+    fetch(`${tmdbapiUrl}?query=${encodeURIComponent(titleValue)}`, {
           method: 'GET',
           headers: requestHeaders
         })
       .then(response => response.json())
       .then(data => {
         appendMoviesToDom(data.results);
+
         // Looping on all pages
         for (let i = 2; i < data.total_pages; i++) {
-          fetch(`${tmdbapiUrl}?query=${encodeURIComponent(title)}&page=${i}`, {
+          fetch(`${tmdbapiUrl}?query=${encodeURIComponent(titleValue)}&page=${i}`, {
             method: 'GET',
             headers: requestHeaders
           })
             .then(response => response.json())
             .then(data => appendMoviesToDom(data.results))
-            .catch(error => console.error('Error fetching page ' + i, error));
         }
       })
     }
   );
-
 
   const appendMoviesToDom = (movies) => {
     console.log(movies);
@@ -68,6 +64,8 @@
       moviesContainer.insertAdjacentHTML('beforeend', "");
     }});
   };
+
+
 
   const createMoviePoster = (movie) => {
       return `
