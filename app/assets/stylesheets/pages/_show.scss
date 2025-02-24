@@ -1,0 +1,50 @@
+/* Banner Part */
+
+.banner-result {
+  height: 25vh;
+  width: auto;
+}
+
+.banner-result img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* poster part */
+
+.poster-result {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  height: 145px;
+  width: 105px;
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+}
+
+.poster-result img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+/* Result container */
+
+.result-container {
+  margin-top: 15px;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+/* Top infos part */
+
+.top-infos-result {
+  width: 55%;
+}
+
+.top-infos-result h5 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1em;
+}
