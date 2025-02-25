@@ -1,3 +1,9 @@
+/* Padding bottom page */
+
+.all-result-page {
+  padding-bottom: 90px;
+}
+
 /* Banner Part */
 
 .banner-result {
@@ -15,7 +21,7 @@
 
 .poster-result {
   position: absolute;
-  top: 20%;
+  top: 21%;
   right: 5%;
   height: 145px;
   width: 105px;
@@ -33,18 +39,91 @@
 
 .result-container {
   margin-top: 15px;
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 /* Top infos part */
 
 .top-infos-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 55%;
+  height: 12.9vh;
 }
 
 .top-infos-result h5 {
   margin: 0;
   padding: 0;
   font-size: 1.1em;
+  font-weight: 400;
+}
+
+.top-infos-result p {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+.under-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  line-height: 0.8;
+}
+
+.date-release {
+
+}
+
+.trailer-show {
+  border: 1px white solid;
+  padding: 6px;
+  letter-spacing: 1px;
+}
+
+/* Displaying the streaming links */
+
+.streaming-links-result {
+  margin-top: 55px;
+}
+
+.streaming-container-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.streaming-container-result h5 {
+  margin: 0;
+  font-weight: 400;
+}
+
+.logo-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo-result-links {
+  background-color: red;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+}
+
+/* Synopsis part */
+
+.synopsis-result {
+  margin-top: 55px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.synopsis-result p {
+  margin: 0;
+  text-align: justify;
 }
