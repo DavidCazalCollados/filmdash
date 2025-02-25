@@ -79,7 +79,7 @@ class PagesController < ApplicationController
       details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
       result_international = JSON.parse(details_serialized)
       @result = {
-        title: result_international["original_title"]
+        title: result_international["title"]
       }
     end
   end
