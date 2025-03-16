@@ -79,7 +79,11 @@ class PagesController < ApplicationController
       details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
       result_international = JSON.parse(details_serialized)
       @result = {
-        title: result_international["title"]
+        title: result_international["title"],
+        backdrop: result_international["backdrop_path"],
+        poster: result_international["poster_path"],
+        date_released: Date.parse(result_international["release_date"]).strftime("%Y"),
+        trailer: result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
       }
     end
   end

@@ -2,20 +2,22 @@
 <%# <h1><%= @result[:title] </h1>%>
 <div class="all-result-page">
   <section class="banner-result">
-    <img src="https://metrograph.imgix.net/2022/08/uncle-boonmee.bmp?fm=pjpg&ixlib=php-3.3.1" alt="">
+    <%= image_tag("https://image.tmdb.org/t/p/original#{@result[:backdrop]}", alt: @result[:title]) %>
   </section>
 
   <section class="poster-result">
-    <img src="https://grandillusioncinema.org/wp-content/uploads/2025/01/uncleboonmee_hires.jpg" alt="">
+    <%# <img src="https://grandillusioncinema.org/wp-content/uploads/2025/01/uncleboonmee_hires.jpg" alt=""> %>
+    <%= image_tag("https://image.tmdb.org/t/p/original#{@result[:poster]}", alt: @result[:title]) %>
   </section>
 
   <section class="result-container">
 
     <section class="top-infos-result">
-      <h5>Uncle Boonmee Who Can Recall His Past Lives</h5>
+      <h5><%= @result[:title] %></h5>
       <div class="under-title">
-        <p class="date-release">2010</p>
-        <p class="trailer-show">TRAILER</p>
+        <p class="date-release"><%= @result[:date_released] %></p>
+        <%# <a class="trailer-show">TRAILER</a> %>
+        <%= link_to 'TRAILER', "https://www.youtube.com/watch?v=#{@result[:trailer]}", class: 'trailer-show', target: '_blank' %>
       </div>
     </section>
 
