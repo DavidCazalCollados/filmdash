@@ -23,10 +23,6 @@ export default class TmdbSearchController {
     const style = document.createElement("style");
     style.textContent = `
       .spinner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         display: flex;
         justify-content: center;
         padding: 2rem;
@@ -98,26 +94,66 @@ export default class TmdbSearchController {
     });
   }
 
+  createMoviePoster(movie) {
+    const movieLink = `/search/${movie.media_type}/${movie.id}`;
+    const title = movie.title || movie.name; // Handle both movie and TV show titles
+    const releaseDate = movie.release_date || movie.first_air_date; // Handle release date for movies and air date for series
+
+    // Extract the year from the date format "YYYY-MM-DD"
+    const releaseYear = releaseDate ? new Date(releaseDate).getFullYear() : 'N/A'; // Extract the year
+
+    // Create the movie poster HTML (now without inline styles)
+    return `
+      <div class="poster-container">
+        <img src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${title}" />
+        <div class="movie-info-overlay">
+          <div class="movie-title-overlay"><strong>${title}</strong></div>
+          <div>${releaseYear}</div>
+          <a href="${movieLink}" class="btn btn-dark button-overlay"><strong>See more</strong></a>
+        </div>
+        <div class="overlay"></div>
+      </div>
+    `;
+  }
+
   appendMoviesToDom(movies) {
+    let previousClickedPoster = null;
+
     movies.forEach((movie) => {
       if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
         const cardHTML = this.createMoviePoster(movie);
         this.moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
+
+        // After the movie poster is inserted, add an event listener for clicks on the poster
+        const posterContainer = this.moviesContainer.querySelector('.poster-container:last-child');
+        const posterImage = posterContainer.querySelector('img');
+        const movieInfo = posterContainer.querySelector('.movie-info-overlay');
+        const overlay = posterContainer.querySelector('.overlay');
+
+        // Handle poster click
+        posterImage.addEventListener('click', () => {
+          // If the same poster is clicked again, navigate to the movie's show page
+          if (posterContainer === previousClickedPoster) {
+            window.location.href = `/search/${movie.media_type}/${movie.id}`;
+          } else {
+            // Hide the movie info and overlay of the previously clicked poster
+            if (previousClickedPoster) {
+              const prevInfo = previousClickedPoster.querySelector('.movie-info-overlay');
+              const prevOverlay = previousClickedPoster.querySelector('.overlay');
+              prevInfo.style.display = 'none';
+              prevOverlay.style.display = 'none';
+            }
+
+            // Show the movie info and overlay on the current poster
+            movieInfo.style.display = 'flex';
+            overlay.style.display = 'block';
+
+            // Set the current poster as the previously clicked one
+            previousClickedPoster = posterContainer;
+          }
+        });
       }
     });
-  }
-
-  createMoviePoster(movie) {
-    const movieLink = `/search/${movie.media_type}/${movie.id}`;
-    const title = movie.title || movie.name; // Handle both movie and TV show titles
-
-    return `
-      <div class="poster-container">
-        <a href="${movieLink}">
-          <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${title}">
-        </a>
-      </div>
-    `;
   }
 
   // Initialize all instances on the page
