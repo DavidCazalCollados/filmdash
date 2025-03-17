@@ -16,8 +16,9 @@
       <h5><%= @result[:title] %></h5>
       <div class="under-title">
         <p class="date-release"><%= @result[:date_released] %></p>
-        <%# <a class="trailer-show">TRAILER</a> %>
-        <%= link_to 'TRAILER', "https://www.youtube.com/watch?v=#{@result[:trailer]}", class: 'trailer-show', target: '_blank' %>
+        <% if @result[:trailer].present? %>
+          <%= link_to 'TRAILER', "https://www.youtube.com/watch?v=#{@result[:trailer]}", class: 'trailer-show', target: '_blank' %>
+        <% end %>
       </div>
     </section>
 
@@ -25,10 +26,13 @@
       <div class="streaming-container-result">
         <h5>This movie is available on:</h5>
         <div class="logo-display">
-          <div class="logo-result-links"></div>
-          <div class="logo-result-links"></div>
-          <div class="logo-result-links"></div>
-          <div class="logo-result-links"></div>
+          <% if @result[:streaming_providers].present? %>
+            <% @result[:streaming_providers].map do |flatrate| %>
+              <%= image_tag("https://www.themoviedb.org/t/p/w500#{flatrate["logo_path"]}", alt: "#{flatrate["provider_name"]} logo", class: "logo-result-links") %>
+            <% end %>
+          <% else %>
+            <p style="text-align: center; font-size: 1em;"><strong>Sorry, this movie is not available on any streaming platform in your country.</strong></p>
+          <% end %>
         </div>
       </div>
     </section>
@@ -38,12 +42,7 @@
         <strong>Synopsis:</strong>
       </p>
       <p>
-        Suffering from acute kidney failure, Boonmee has chosen to
-        spend his final days surrounded by his loved ones in the countryside.
-        Surprisingly, the ghost of his deceased wife appears to care for him,
-        and his long lost son returns home in a non-human form. Contemplating the
-        reasons for his illness, Boonmee treks through the jungle with his family
-        to a mysterious hilltop cave—the birthplace of his first life.
+        <%= @result[:synopsis] %>
       </p>
     </section>
 

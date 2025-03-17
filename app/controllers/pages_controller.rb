@@ -73,7 +73,19 @@ class PagesController < ApplicationController
       details_serialized = RestClient.get("https://api.themoviedb.org/3/tv/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
       result_international = JSON.parse(details_serialized)
       @result = {
-        title: result_international["name"]
+        title: result_international["name"],
+        backdrop: result_international["backdrop_path"],
+        poster: result_international["poster_path"],
+        date_released: Date.parse(result_international["first_air_date"]).strftime("%Y"),
+        trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
+                    result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
+                  else
+                    nil
+                  end,
+        synopsis: result_international["overview"],
+        streaming_providers:  if result_international["watch/providers"]["results"].present? && result_international["watch/providers"]["results"][@country].present?
+                                result_international["watch/providers"]["results"][@country]["flatrate"]
+                              end
       }
     else
       details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
@@ -83,7 +95,15 @@ class PagesController < ApplicationController
         backdrop: result_international["backdrop_path"],
         poster: result_international["poster_path"],
         date_released: Date.parse(result_international["release_date"]).strftime("%Y"),
-        trailer: result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
+        trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
+                    result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
+                  else
+                    nil
+                  end,
+        synopsis: result_international["overview"],
+        streaming_providers:  if result_international["watch/providers"]["results"].present? && result_international["watch/providers"]["results"][@country].present?
+                                result_international["watch/providers"]["results"][@country]["flatrate"]
+                              end
       }
     end
   end
