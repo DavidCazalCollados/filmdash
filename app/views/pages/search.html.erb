@@ -1,82 +1,17 @@
-<h1
-  class="title-search"
->
+<h1 class="title-search">
   Stream Hunt:<br />
   Find Your Movie
 </h1>
 
-<div class="input-group mb-5 mt-4 input-search">
-  <input type="text" class="form-control" placeholder="Program Title" aria-label="Program Title" aria-describedby="button-addon2">
-  <button class="btn btn-primary" type="button" id="button-addon2">Search</button>
-</div>
+<div data-controller="tmdb-search" data-api-url="https://api.themoviedb.org/3/search/multi" data-headers='<%= raw @request_headers.to_json %>'>
+  <div class="input-group mb-5 mt-4 input-search">
+    <input type="text" class="form-control" placeholder="Program Title" aria-label="Program Title" aria-describedby="button-addon2">
+    <button class="btn btn-secondary" type="button" id="button-addon2">Search</button>
+  </div>
 
-<div class="result-search-container">
-  <div class="result-search-grid">
+  <div class="result-search-container">
+    <div class="result-search-grid">
+      <!-- Results will be populated here -->
+    </div>
   </div>
 </div>
-
-
-
-<script>
-
-  const tmdbapiUrl = "https://api.themoviedb.org/3/search/multi";
-  const requestHeaders = <%= raw @request_headers.to_json %>;
-
-  const moviesContainer = document.querySelector(".result-search-grid");
-
-  const title = document.querySelector(".form-control");
-
-  document.getElementById("button-addon2").addEventListener('click', (e) => {
-    e.preventDefault()
-    const titleValue = title.value;
-    moviesContainer.innerHTML = ""; // Clearing the previous results
-
-    // Searching for the first page
-    fetch(`${tmdbapiUrl}?query=${encodeURIComponent(titleValue)}`, {
-          method: 'GET',
-          headers: requestHeaders
-        })
-      .then(response => response.json())
-      .then(data => {
-        appendMoviesToDom(data.results);
-
-        // Looping on all pages
-        for (let i = 2; i < data.total_pages; i++) {
-          fetch(`${tmdbapiUrl}?query=${encodeURIComponent(titleValue)}&page=${i}`, {
-            method: 'GET',
-            headers: requestHeaders
-          })
-            .then(response => response.json())
-            .then(data => appendMoviesToDom(data.results))
-        }
-      })
-    }
-  );
-
-  const appendMoviesToDom = (movies) => {
-    console.log(movies);
-    const moviesContainer = document.querySelector(".result-search-grid");
-    movies.forEach((movie) => {
-      if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
-        cardHTML = createMoviePoster(movie);
-        moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
-    } else {
-      moviesContainer.insertAdjacentHTML('beforeend', "");
-    }});
-  };
-
-
-
-  const createMoviePoster = (movie) => {
-    const movieLink = `/search/${movie.media_type}/${movie.id}`;
-
-    return `
-      <div class="poster-container">
-        <a href="${movieLink}">
-          <img class="poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${movie.title}">
-        </a>
-      </div>
-    `
-  };
-
-</script>

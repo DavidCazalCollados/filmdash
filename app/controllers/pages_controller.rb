@@ -76,7 +76,11 @@ class PagesController < ApplicationController
         title: result_international["name"],
         backdrop: result_international["backdrop_path"],
         poster: result_international["poster_path"],
-        date_released: Date.parse(result_international["first_air_date"]).strftime("%Y"),
+        date_released:  if result_international["first_air_date"] != ""
+                          Date.parse(result_international["first_air_date"]).strftime("%Y")
+                        else
+                          result_international["first_air_date"]
+                        end,
         trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
                     result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
                   else
@@ -94,7 +98,11 @@ class PagesController < ApplicationController
         title: result_international["title"],
         backdrop: result_international["backdrop_path"],
         poster: result_international["poster_path"],
-        date_released: Date.parse(result_international["release_date"]).strftime("%Y"),
+        date_released:  if result_international["release_date"] != ""
+                          Date.parse(result_international["release_date"]).strftime("%Y")
+                        else
+                          result_international["release_date"]
+                        end,
         trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
                     result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
                   else
