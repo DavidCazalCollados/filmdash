@@ -23,6 +23,10 @@ export default class TmdbSearchController {
     const style = document.createElement("style");
     style.textContent = `
       .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
         justify-content: center;
         padding: 2rem;
