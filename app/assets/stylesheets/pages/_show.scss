@@ -1,0 +1,127 @@
+/* Padding bottom page */
+
+.all-result-page {
+  padding-bottom: 90px;
+}
+
+/* Banner Part */
+
+.banner-result {
+  height: 25vh;
+  width: auto;
+}
+
+.banner-result img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* poster part */
+
+.poster-result {
+  position: absolute;
+  top: 21%;
+  right: 5%;
+  height: 145px;
+  width: 105px;
+  box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+}
+
+.poster-result img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+/* Result container */
+
+.result-container {
+  margin-top: 15px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+/* Top infos part */
+
+.top-infos-result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 55%;
+  height: 12.9vh;
+}
+
+.top-infos-result h5 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.top-infos-result p {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+.under-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  line-height: 0.8;
+}
+
+.trailer-show {
+  border: 1px white solid;
+  padding: 6px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: white;
+}
+
+/* Displaying the streaming links */
+
+.streaming-links-result {
+  margin-top: 55px;
+}
+
+.streaming-container-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.streaming-container-result h5 {
+  margin: 0;
+  font-weight: 400;
+}
+
+.logo-display {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo-result-links {
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+/* Synopsis part */
+
+.synopsis-result {
+  margin-top: 40px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.synopsis-result p {
+  margin: 0;
+  text-align: justify;
+}

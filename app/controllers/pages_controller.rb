@@ -48,10 +48,72 @@ class PagesController < ApplicationController
         prepare_result(details)
       end
     end
-    # raise
   end
 
   def details
+  end
+
+  def search
+    @request_headers = {
+      Authorization: "Bearer #{ENV['API_KEY_TMDB']}",
+      Accept: "application/json"
+    }
+  end
+
+  def show
+    @movie_id = params[:id]
+    @media_type = params[:media_type]
+    @country = current_user.country.code
+    request_headers = {
+      Authorization: "Bearer #{ENV["API_KEY_TMDB"]}",
+      accept: "application/JSON"
+    }
+
+    if params[:media_type] == "tv"
+      details_serialized = RestClient.get("https://api.themoviedb.org/3/tv/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
+      result_international = JSON.parse(details_serialized)
+      @result = {
+        title: result_international["name"],
+        backdrop: result_international["backdrop_path"],
+        poster: result_international["poster_path"],
+        date_released:  if result_international["first_air_date"] != ""
+                          Date.parse(result_international["first_air_date"]).strftime("%Y")
+                        else
+                          result_international["first_air_date"]
+                        end,
+        trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
+                    result_international["videos"]["results"].find { |video| video["site"].downcase == "youtube" }["key"]
+                  else
+                    nil
+                  end,
+        synopsis: result_international["overview"],
+        streaming_providers:  if result_international["watch/providers"]["results"].present? && result_international["watch/providers"]["results"][@country].present?
+                                result_international["watch/providers"]["results"][@country]["flatrate"]
+                              end
+      }
+    else
+      details_serialized = RestClient.get("https://api.themoviedb.org/3/movie/#{@movie_id}?append_to_response=videos,watch/providers", request_headers)
+      result_international = JSON.parse(details_serialized)
+      @result = {
+        title: result_international["title"],
+        backdrop: result_international["backdrop_path"],
+        poster: result_international["poster_path"],
+        date_released:  if result_international["release_date"] != ""
+                          Date.parse(result_international["release_date"]).strftime("%Y")
+                        else
+                          result_international["release_date"]
+                        end,
+        trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
+                    result_international["videos"]["results"].find { |video| video["site"].downcase == "youtube" }["key"]
+                  else
+                    nil
+                  end,
+        synopsis: result_international["overview"],
+        streaming_providers:  if result_international["watch/providers"]["results"].present? && result_international["watch/providers"]["results"][@country].present?
+                                result_international["watch/providers"]["results"][@country]["flatrate"]
+                              end
+      }
+    end
   end
 
   private
