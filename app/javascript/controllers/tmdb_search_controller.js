@@ -12,7 +12,7 @@ export default class TmdbSearchController {
 
     // Create spinner element
     this.spinner = document.createElement("div");
-    this.spinner.className = "spinner";
+    this.spinner.className = "search-spinner";
     this.spinner.innerHTML = `
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -22,10 +22,12 @@ export default class TmdbSearchController {
     // Add spinner styles
     const style = document.createElement("style");
     style.textContent = `
-      .spinner {
-        display: flex;
-        justify-content: center;
-        padding: 2rem;
+      .search-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
       }
     `;
     document.head.appendChild(style);
