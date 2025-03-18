@@ -119,7 +119,8 @@ export default class TmdbSearchController {
   }
 
   appendMoviesToDom(movies) {
-    let previousClickedPoster = null;
+    // Clear existing content first
+    this.moviesContainer.innerHTML = "";
 
     movies.forEach((movie) => {
       if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
@@ -132,28 +133,51 @@ export default class TmdbSearchController {
         const movieInfo = posterContainer.querySelector('.movie-info-overlay');
         const overlay = posterContainer.querySelector('.overlay');
 
+        // Track clicks on this specific poster
+        let isInfoShowing = false;
+
         // Handle poster click
         posterImage.addEventListener('click', () => {
-          // If the same poster is clicked again, navigate to the movie's show page
-          if (posterContainer === previousClickedPoster) {
+          // If info is already showing on this poster, navigate to the detail page
+          if (isInfoShowing) {
             window.location.href = `/search/${movie.media_type}/${movie.id}`;
-          } else {
-            // Hide the movie info and overlay of the previously clicked poster
-            if (previousClickedPoster) {
-              const prevInfo = previousClickedPoster.querySelector('.movie-info-overlay');
-              const prevOverlay = previousClickedPoster.querySelector('.overlay');
-              prevInfo.style.display = 'none';
-              prevOverlay.style.display = 'none';
-            }
-
-            // Show the movie info and overlay on the current poster
-            movieInfo.style.display = 'flex';
-            overlay.style.display = 'block';
-
-            // Set the current poster as the previously clicked one
-            previousClickedPoster = posterContainer;
+            return;
           }
+
+          // First, hide all other movie infos and overlays
+          const allInfos = this.moviesContainer.querySelectorAll('.movie-info-overlay');
+          const allOverlays = this.moviesContainer.querySelectorAll('.overlay');
+
+          allInfos.forEach(info => {
+            info.style.display = 'none';
+          });
+
+          allOverlays.forEach(ol => {
+            ol.style.display = 'none';
+          });
+
+          // Reset all tracking variables
+          const allPosters = this.moviesContainer.querySelectorAll('.poster-container');
+          allPosters.forEach(poster => {
+            poster.dataset.infoShowing = 'false';
+          });
+
+          // Show this movie's info and overlay
+          movieInfo.style.display = 'flex';
+          overlay.style.display = 'block';
+          isInfoShowing = true;
+          posterContainer.dataset.infoShowing = 'true';
         });
+
+        // Also add click handler to the See More button
+        const seeMoreButton = movieInfo.querySelector('.btn');
+        if (seeMoreButton) {
+          seeMoreButton.addEventListener('click', (e) => {
+            // Prevent the event from bubbling to the poster image
+            e.stopPropagation();
+            window.location.href = `/search/${movie.media_type}/${movie.id}`;
+          });
+        }
       }
     });
   }

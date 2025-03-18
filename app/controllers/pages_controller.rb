@@ -82,7 +82,7 @@ class PagesController < ApplicationController
                           result_international["first_air_date"]
                         end,
         trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
-                    result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
+                    result_international["videos"]["results"].find { |video| video["site"].downcase == "youtube" }["key"]
                   else
                     nil
                   end,
@@ -104,7 +104,7 @@ class PagesController < ApplicationController
                           result_international["release_date"]
                         end,
         trailer:  if result_international["videos"].present? && result_international["videos"]["results"].present?
-                    result_international["videos"]["results"].find { |video| video["type"].downcase == "trailer" && video["site"].downcase == "youtube" }["key"]
+                    result_international["videos"]["results"].find { |video| video["site"].downcase == "youtube" }["key"]
                   else
                     nil
                   end,
