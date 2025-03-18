@@ -110,7 +110,7 @@ export default class TmdbSearchController {
         <img src="https://image.tmdb.org/t/p/w185/${movie.poster_path}" alt="${title}" />
         <div class="movie-info-overlay">
           <div class="movie-title-overlay"><strong>${title}</strong></div>
-          <div>${releaseYear}</div>
+          <div class="movie-date-overlay">${releaseYear}</div>
           <a href="${movieLink}" class="btn btn-dark button-overlay"><strong>See more</strong></a>
         </div>
         <div class="overlay"></div>
