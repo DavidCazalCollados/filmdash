@@ -12,7 +12,7 @@ export default class TmdbSearchController {
 
     // Create spinner element
     this.spinner = document.createElement("div");
-    this.spinner.className = "spinner";
+    this.spinner.className = "search-spinner";
     this.spinner.innerHTML = `
       <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -22,10 +22,12 @@ export default class TmdbSearchController {
     // Add spinner styles
     const style = document.createElement("style");
     style.textContent = `
-      .spinner {
-        display: flex;
-        justify-content: center;
-        padding: 2rem;
+      .search-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
       }
     `;
     document.head.appendChild(style);
@@ -117,39 +119,54 @@ export default class TmdbSearchController {
   }
 
   appendMoviesToDom(movies) {
-    let previousClickedPoster = null;
+    // Clear existing content
+    this.moviesContainer.innerHTML = "";
 
     movies.forEach((movie) => {
       if ((movie.media_type === "movie" || movie.media_type === "tv") && (movie.poster_path !== null)) {
         const cardHTML = this.createMoviePoster(movie);
         this.moviesContainer.insertAdjacentHTML('beforeend', cardHTML);
 
-        // After the movie poster is inserted, add an event listener for clicks on the poster
+        // Get the newly added poster elements
         const posterContainer = this.moviesContainer.querySelector('.poster-container:last-child');
         const posterImage = posterContainer.querySelector('img');
         const movieInfo = posterContainer.querySelector('.movie-info-overlay');
         const overlay = posterContainer.querySelector('.overlay');
+        const seeMoreButton = movieInfo.querySelector('.btn');
 
-        // Handle poster click
-        posterImage.addEventListener('click', () => {
-          // If the same poster is clicked again, navigate to the movie's show page
-          if (posterContainer === previousClickedPoster) {
+        // IMPORTANT: Make sure overlay and info are hidden initially
+        movieInfo.style.display = 'none';
+        overlay.style.display = 'none';
+
+        // Handle poster image click - should ONLY show overlay, never navigate
+        posterImage.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent any default navigation
+
+          // Hide all other overlays first
+          const allMovieInfos = this.moviesContainer.querySelectorAll('.movie-info-overlay');
+          const allOverlays = this.moviesContainer.querySelectorAll('.overlay');
+
+          allMovieInfos.forEach(info => info.style.display = 'none');
+          allOverlays.forEach(ol => ol.style.display = 'none');
+
+          // Show this movie's info and overlay
+          movieInfo.style.display = 'flex';
+          overlay.style.display = 'block';
+        });
+
+        // Add click handler to the See More button - should ONLY navigate
+        if (seeMoreButton) {
+          seeMoreButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event from bubbling to poster
             window.location.href = `/search/${movie.media_type}/${movie.id}`;
-          } else {
-            // Hide the movie info and overlay of the previously clicked poster
-            if (previousClickedPoster) {
-              const prevInfo = previousClickedPoster.querySelector('.movie-info-overlay');
-              const prevOverlay = previousClickedPoster.querySelector('.overlay');
-              prevInfo.style.display = 'none';
-              prevOverlay.style.display = 'none';
-            }
+          });
+        }
 
-            // Show the movie info and overlay on the current poster
-            movieInfo.style.display = 'flex';
-            overlay.style.display = 'block';
-
-            // Set the current poster as the previously clicked one
-            previousClickedPoster = posterContainer;
+        // Also handle clicks on the overlay - should close the overlay
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) { // Only if directly clicking the overlay
+            movieInfo.style.display = 'none';
+            overlay.style.display = 'none';
           }
         });
       }

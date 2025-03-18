@@ -27,11 +27,12 @@
 .result-search-grid {
   width: 87%;
   height: 100%;
-  gap: 2vw;
+  gap: 3.5vw;
   margin-bottom: 10vh;
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
+  justify-content: center;
 }
 
 .poster-container img {
@@ -42,8 +43,8 @@
 }
 
 .poster-container {
-  height: 107px;
-  width: 23.2%;
+  height: 200px;
+  width: 45%;
   position: relative;
 }
 
