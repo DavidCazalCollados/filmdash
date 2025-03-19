@@ -1,6 +1,6 @@
-/* Title search section */
+ /* Title search section */
 
-.title-search {
+ .title-search {
   font-family: 'Yeseva One', serif;
   margin: 0;
   padding-top: 8vh;
@@ -86,4 +86,98 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+@media(min-width: 500px) {
+
+  /* Title search section */
+
+  .title-search {
+    font-family: 'Yeseva One', serif;
+    margin: 0;
+    padding-top: 8vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 0;
+  }
+
+  /* Title bar section */
+
+  .input-search {
+    width: auto;
+    margin-left: 10vw;
+    margin-right: 10vw;
+  }
+
+  /* Result search section */
+
+  .result-search-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .result-search-grid {
+    width: 87%;
+    height: 100%;
+    gap: 3.5vw;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    justify-content: center;
+  }
+
+  .poster-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .poster-container {
+    height: 300px;
+    width: 200px;
+    position: relative;
+  }
+
+  /* See more button */
+
+  .movie-info-overlay {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    justify-content: end;
+    gap: 1.2vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3vw;
+    z-index: 10;
+    font-size: 0.7em;
+    height: 100%;
+    width: 100%;
+  }
+
+  .movie-title-overlay {
+    font-size: 1.3em;
+  }
+
+  .movie-date-overlay {
+    font-size: 1.2em;
+  }
+
+  .button-overlay {
+    font-size: 1.2em;
+  }
+
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
