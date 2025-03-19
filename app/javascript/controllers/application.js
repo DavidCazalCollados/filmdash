@@ -1,6 +1,6 @@
 import { Application } from "@hotwired/stimulus"
 import { Turbo } from "@hotwired/turbo-rails";
-import "./tmdb_search_controller"
+// import "./tmdb_search_controller"
 
 Turbo.setFormMode("on")
 
